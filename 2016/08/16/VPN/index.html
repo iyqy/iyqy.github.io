@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Evan Ye" />
+
+
+
+<meta name="description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
+<meta property="og:url" content="http://qianyu1996.com/2016/08/16/VPN/index.html">
+<meta property="og:site_name" content="Evan's Island">
+<meta property="og:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta property="og:updated_time" content="2016-08-28T14:11:51.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
+<meta name="twitter:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Evan&#39;s Island" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>CentOS-5用OpenVZ方式搭建VPN通道 | Evan&#39;s Island</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Evan Ye</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">一期一会 世当珍惜</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>好友链接~</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/pho/">摄影集</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:iyqy@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055428900842?is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/iyqy" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/yeqianyu" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机/">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音乐/">音乐</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.acohome.cn/">旋哥的主页</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.csdn.net/yi_afly">程义的CSDN</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一只计算机懵逼男</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Evan Ye</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Evan Ye</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">一期一会 世当珍惜</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/pho/">摄影集</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:iyqy@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055428900842?is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/iyqy" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/yeqianyu" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="好友链接~" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/16/VPN/" class="article-date">
+      <time datetime="2016-08-16T07:50:01.000Z" itemprop="datePublished">2016-08-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS-5用OpenVZ方式搭建VPN通道
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.<br>搭建方式有OpenVPN，PPTP，SSH<br>OpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）<br>这里采用OpenVPN方式搭建。</p>
+<p>准备工作：下载Xshell客户端，连网状态（ChinaNet等公共场合的wifi无效）</p>
+<h3>一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</h3><br>SSH登陆VPS后输入<br><code>cat /dev/net/tun</code><br>若返回信息为：cat: /dev/net/tun: File descriptor in bad state 说明tun/tap已经可以使用；<br>如果返回：cat: /dev/net/tun: No such device 或其他则说明tun/tap没有被正确配置，发TK联系客服申请开通tun/tap。<br><a id="more"></a><br>然后检查iptables_nat模块（如果还没有安装iptables，先安装）<br><br><code>yum install iptables </code>   #如已安装跳过<br><br>接着请输入：<br><code>iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -j SNAT –to-source 11.22.33.44</code><br>（11.22.33.44是你VPS的IP）<br><br>然后用<br><br><code>iptables -t nat -L</code><br>查看iptables转发状态，如果显示以下类似的结果则说明转发成功：<br>target             prot opt source                      destination<br>SNAT              all – 10.168.0.0/16                anywhere                    to:11.22.33.44<br><br><h3>二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</h3><br>默认情况下CentOS的yum源是没有OpenVPN的,安装EPEL这个东西成功后,yum源里面就有OpenVPN了。<br>5.x版系统安装EPEL：<br><br><code>rpm -Uvh <a href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a></code><br><br><code>yum -y install openvpn</code><br>对了，在所有步骤之前（就是刚登陆进来时），最好先更新升级下系统，这样可以自动分析当前系统的安装环境并根据具体命令网络升级安装所需组件，更便于之后组件的安装。<br><code>yum -y update</code><br><br><h3>三、安装好后，先使用easy-rsa生成服务端证书：</h3><br>默认OpenVPN的easy-rsa文档会在/usr/share/doc/openvpn/examples/easy-rsa/，如果不在的话请先检查是否安装成功然后用locate或find命令查找该文档。<br>然后将该文档下所需的配置文件复制到/etc/openvpn/下面：<br><br>如果不存在则执行：<br><code>wget <a href="http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz" target="_blank" rel="external">http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz</a></code><br><code>tar -zxvf easy-rsa-2.2.0_master.tar.gz</code><br><code>cp -R easy-rsa-2.2.0_master/easy-rsa/ /etc/openvpn/</code><br><br><br>1、生成CA证书：<br><code>cd /etc/openvpn/easy-rsa/2.0</code><br><code>source vars</code><br><code>./clean-all</code><br><code>./build-ca</code><br>期间会提示输入一些信息，直接回车默认即可。<br><br>2、生成服务器端证书和密钥：（server为服务端名字可以自定义）<br><code>./build-key-server server</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br><br>3、生成客户端证书和密钥：（client为客户端名字可以自定义，注意这里的客户端名字不能与上步的服务端名字相同）<br><code>./build-key client</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br>若要生成多个客户端的证书和密钥，将client改成另外的名字重复操作即可。所有生成的证书和密钥存都放在/etc/openvpn/easy-rsa/2.0/keys/下面。<br><br>4、生成Diffie Hellman参数：<br><code>./build-dh</code><br><h3>四、配置OpenVPN服务器端文件</h3>
+
+<p>1、编辑/etc/openvpn/server.conf 文件，如果没有可以创建一个，加入下面的内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">local 11.22.33.44    #11.22.33.44为VPS的IP</div><div class="line">port 8080    #端口，需要与客户端配置保持一致，并保证与其他软件无共用</div><div class="line">proto udp    #使用协议，需要与客户端配置保持一致</div><div class="line">dev tun      #也可以选择tap模式</div><div class="line">ca /etc/openvpn/easy-rsa/2.0/keys/ca.crt</div><div class="line">cert /etc/openvpn/easy-rsa/2.0/keys/server.crt</div><div class="line">key /etc/openvpn/easy-rsa/2.0/keys/server.key</div><div class="line">dh /etc/openvpn/easy-rsa/2.0/keys/dh1024.pem</div><div class="line">ifconfig-pool-persist ipp.txt</div><div class="line">server 10.168.1.0 255.255.255.0    #给客户的分配的局域网IP段，注意不要与客户端网段冲突！</div><div class="line">push &amp;quot;redirect-gateway&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.8.8&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.4.4&amp;quot;</div><div class="line">client-to-client</div><div class="line">;duplicate-cn</div><div class="line">keepalive 20 60</div><div class="line">comp-lzo</div><div class="line">max-clients 50</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">status openvpn-status.log</div><div class="line">log-append openvpn.log</div><div class="line">verb 3</div><div class="line">mute 20</div></pre></td></tr></table></figure>
+<p>3、修改/etc/sysctl.conf的内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">net.ipv4.ip_forward = 1</div><div class="line">net.ipv4.conf.all.send_redirects = 0</div><div class="line">net.ipv4.conf.default.send_redirects = 0</div><div class="line">net.ipv4.conf.all.accept_redirects = 0</div><div class="line">net.ipv4.conf.default.accept_redirects = 0</div></pre></td></tr></table></figure></p>
+<p>重新载入/etc/sysctl.conf使其生效，执行如下命令：</p>
+<p><code>sysctl -p</code><br>至此VPS上的服务器端配置就全部完成了。<br>若想使其配置生效，则需重启OpenVPN服务</p>
+<p><code>service openvpn restart –config /etc/openvpn/server.conf</code></p>
+<h3>五、安装配置OpenVPN客户端文件</h3>
+
+<p>1、下载安装客户端<br>Windwos用户推荐去openvpn.net选择合适的版本进行安装，安装中的选项全部按默认即可；Mac用户推荐使用tunnelblick。</p>
+<p>2、下载之前在VPS上生成的客户端证书及密钥<br>证书和密钥存都在/etc/openvpn/easy-rsa/2.0/keys/里，可以使用winscp链接到VPS上下载，将ca.crt、client.crt、client.key这三个文件下载到OpenVPN客户端程序的config文件夹里,默认为：C:\Program Files\OpenVPN\config<br><code>yum  install lrzsz</code><br>此时再使用sz命令下载</p>
+<p>3、创建客户端配置文件<br>在C:\Program Files\OpenVPN\config 下面创建一个sunny.ovpn的文件，添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">client        #这个client不是自定义名称 不能更改</div><div class="line">dev tun       #要与前面server.conf中的配置一致。</div><div class="line">proto udp              #要与前面server.conf中的配置一致。</div><div class="line">remote 11.22.33.44 8080    #将11.22.33.44替换为你VPS的IP，端口与前面的server.conf中配置一致。</div><div class="line">resolv-retry infinite</div><div class="line">nobind</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">ca ca.crt              #具体名称以刚下载的为准</div><div class="line">cert client.crt              #具体名称以刚下载的为准</div><div class="line">key client.key              #具体名称以刚下载的为准</div><div class="line">ns-cert-type server</div><div class="line">redirect-gateway</div><div class="line">keepalive 20 60</div><div class="line">#tls-auth ta.key 1</div><div class="line">comp-lzo</div><div class="line">verb 3</div><div class="line">mute 20</div><div class="line">route-method exe</div><div class="line">route-delay 2</div></pre></td></tr></table></figure>
+<p></p><h3>六、运行OpenVPN客户端</h3><br>运行OpenVPN GUI后，屏幕右下角的系统托盘区，会显示一个由两个红屏电脑组成的图标，右击它，选中菜单中添加的名为sunny的服务器，点击Connect，<br>过一会儿，OpenVPN图标变成绿色时VPN就表示链接成功了。就表示链接成功了~<p></p>
+<p>参考原文：<a href="http://shit.name/openvpn-on-centos/" target="_blank" rel="external">http://shit.name/openvpn-on-centos/<a></a></a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
+        <p><span>发布时间:</span>2016-08-16, 15:50:01</p>
+        <p><span>最后更新:</span>2016-08-28, 22:11:51</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/16/VPN/" title="CentOS-5用OpenVZ方式搭建VPN通道">http://qianyu1996.com/2016/08/16/VPN/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2016/08/16/VPN/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/09/01/music/">
+                    Request
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/26/JVM/">
+                    JVM内存模型图解
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、安装好后，先使用easy-rsa生成服务端证书：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、配置OpenVPN服务器端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">五、安装配置OpenVPN客户端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">六、运行OpenVPN客户端</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"CentOS-5用OpenVZ方式搭建VPN通道　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/16/VPN/" data-title="CentOS-5用OpenVZ方式搭建VPN通道" data-url="http://qianyu1996.com/2016/08/16/VPN/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"yeqianyu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){ 
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2016/08/16/VPN/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadComment();
+            $commentBar.fadeOut(800);
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/09/01/music/" title="上一篇: Request">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/26/JVM/" title="下一篇: JVM内存模型图解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/zcyl/">计算机组成原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/01/music/">Request</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/26/JVM/">JVM内存模型图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/leiji/">Java类集复习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/yuanze/">面向对象四大设计原则</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/reflect/">反射机制复习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/20/ajax/">前端-原生Ajax理解</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Evan Ye
+            </div>
+            <div class="footer-right">
+                <a href="http://club.aust.net.cn/portal.php">From AUST——知通团队</a><i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*)  " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

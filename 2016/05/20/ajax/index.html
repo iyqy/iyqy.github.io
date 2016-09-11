@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Evan Ye" />
+
+
+
+<meta name="description" content="前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。
+什么是Ajax?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端-原生Ajax理解">
+<meta property="og:url" content="http://qianyu1996.com/2016/05/20/ajax/index.html">
+<meta property="og:site_name" content="Evan's Island">
+<meta property="og:description" content="前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。
+什么是Ajax?">
+<meta property="og:updated_time" content="2016-08-28T06:25:36.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端-原生Ajax理解">
+<meta name="twitter:description" content="前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。
+什么是Ajax?">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Evan&#39;s Island" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>前端-原生Ajax理解 | Evan&#39;s Island</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Evan Ye</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">一期一会 世当珍惜</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>好友链接~</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/pho/">摄影集</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:iyqy@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/p/1005055428900842?is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/iyqy" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/yeqianyu" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机/">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音乐/">音乐</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.acohome.cn/">旋哥的主页</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.csdn.net/yi_afly">程义的CSDN</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一只计算机懵逼男</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Evan Ye</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Evan Ye</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">一期一会 世当珍惜</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/pho/">摄影集</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:iyqy@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/p/1005055428900842?is_all=1" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/iyqy" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/yeqianyu" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="好友链接~" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-ajax" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/20/ajax/" class="article-date">
+      <time datetime="2016-05-20T05:57:46.000Z" itemprop="datePublished">2016-05-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端-原生Ajax理解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/实践/">实践</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。</p>
+<p></p><h2 color="red">什么是Ajax?</h2><br><a id="more"></a><br>简单地说，如果你访问一个没有用到Ajax技术的网页，通常你点一下按钮就要刷新一下页面，尽管新页面上只有一行字和当前页面不一样，但你还是要无聊地等待页面刷新。用了AJAX之后，你点击，然后页面上的一行字就变化了，页面本身不用刷新。<br>Ajax的应用：<br>百度搜索提示，淘宝新会员注册时用户名验证，级联下拉列表，显示进度条……<p></p>
+<p>补充一下下面的内容（摘录自知乎）：<br>ajax的全称是AsynchronousJavascript+XML。<br>异步传输+js+xml。<br>所谓异步，在这里简单地解释就是：向服务器发送请求的时候，我们不必等待结果，而是可以同时做其他的事情，等到有了结果我们可以再来处理这个事。（当然，在其他语境下这个解释可能就不对了）<br>这个很重要，如果不是这样的话，我们点完按钮，页面就会死在那里，其他的数据请求不会往下走了。这样比等待刷新似乎更加讨厌。<br>（虽然提供异步通讯功能的组件默认情况下都是异步的，但它们也提供了同步选项，如果你好奇把那个选项改为false的话，你的页面就会死在那里）<br>xml只是一种数据格式，在这件事里并不重要，我们在更新一行字的时候理论上说不需要这个格式，但如果我们更新很多内容，那么格式化的数据可以使我们有条理地去实现更新。</p>
+<p></p><h2 color="green">过程及代码</h2><br>其实在博主的脑袋里，Ajax就是一个超级有用的XMLHttpRequest对象啦，ajax就可以让js读取服务器上的数据。<br>那么首先你要创建出这个对象了咯，一般来说，Ajax的使用就像打电话一样分为四步：<br>1.你得有个手机。<br>2.拨号。<br>3.你开始说话balabala。。。<br>4.听别人说。。。。<p></p>
+<p>那么Ajax：<br>1.创建Ajax对象。<br>2.连接到服务器。<br>3.发送请求。<br> 4.接受返回值。</p>
+<p>1.创建Ajax对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">if (window.XMLHttpRequest) &#123; // Mozilla……等非IE浏览器</div><div class="line">var oAjax = new XMLHttpRequest(); // 创建XMLHttpRequest对象</div><div class="line">&#125; else if (window.ActiveXObject) &#123; // IE浏览器</div><div class="line">try &#123;</div><div class="line">var oAjax = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); // 创建XMLHttpRequest对象</div><div class="line">&#125; catch (e) &#123;</div><div class="line">try &#123;</div><div class="line">var oAjax = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); // 创建XMLHttpRequest对象</div><div class="line">&#125; catch (e) &#123;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>每个浏览器对Ajax的支持是不同的，创建的方式也不同，以上判断代码就展示了在IE浏览器和非IE浏览器环境下用各自不同的方式创建XMLHttpRequest对象。<br>这里要注意一下js的一个特性，在使用判断时必须使用window.XMLHttpRequest而不能使用XMLHttpRquest,在js中用没有定义的变量会报错，使用没有定义的属性不会报错，而是仅仅给你一个undefined提示，在IE6浏览器下，XMLHttpRequest是没有定义的，考虑到兼容性问题，必须使用window.XMLHttpRequest来充当判断条件，这时浏览器就把它当window的一个属性，返回undefined而非报错，这就是我们需要的。</p>
+<p>2.连接到服务器。</p>
+<p><code>oAjax.open();</code><br>open()有三个参数，第一个参数为发送方式，值为POST，GET<br>第二个参数为你要访问的文件的url。<br>第三个为 值为true 或者 false ，true代表采用异步传输方式连接服务器。</p>
+<p>3.发送请求<br><code>oAjax.send();</code></p>
+<p>4 .接受返回值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">funtion getResult()&#123;</div><div class="line">if(oAjax.readyState==4)&#123;</div><div class="line">      if(oAjax.status==200)&#123;</div><div class="line">                            alert(oAjax.reponseText);</div><div class="line">                            &#125;else&#123;alert(&quot;访问失败&quot;);&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>readyState的值所代表的状态：<br>0：请求未初始化（还没有调用 open()）。<br>1：请求已经建立，但是还没有发送（还没有调用 send()）。<br>2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。<br>3：请求在处理中；通常响应中已有部分数据可用了，但是服务器还没有完成响应的生成。<br>4：响应已完成；您可以获取并使用服务器的响应了。<br>       status的值所代表的状态（最常见的5种）：<br>       1.200表示成功<br>       2.202表示请求被接受，但尚未成功<br>       3.400错误的请求<br>       4.404文件未找到<br>       5.500内部服务器错误</p>
+<p>四部曲完成了，为了提高的代码重用性，可以将代码封装到一个.js文件中，代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">var net = new Object(); // 定义一个全局变量net</div><div class="line">// 编写构造函数</div><div class="line">net.AjaxRequest = function(url, onload, onerror, method, params) &#123;</div><div class="line">this.req = null;</div><div class="line">this.onload = onload;</div><div class="line">this.onerror = (onerror) ? onerror : this.defaultError;</div><div class="line">this.loadDate(url, method, params);</div><div class="line">&#125;</div><div class="line">// 编写用于初始化XMLHttpRequest对象并指定处理函数，最后发送HTTP请求的方法</div><div class="line">net.AjaxRequest.prototype.loadDate = function(url, method, params) &#123;</div><div class="line">if (!method) &#123; // 设置默认为的请求方式为GET</div><div class="line">method = &quot;GET&quot;;</div><div class="line">&#125;</div><div class="line">if (window.XMLHttpRequest) &#123; // Mozilla……等非IE浏览器</div><div class="line">this.req = new XMLHttpRequest(); // 创建XMLHttpRequest对象</div><div class="line">&#125; else if (window.ActiveXObject) &#123; // IE浏览器</div><div class="line">try &#123;</div><div class="line">this.req = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); // 创建XMLHttpRequest对象</div><div class="line">&#125; catch (e) &#123;</div><div class="line">try &#123;</div><div class="line">this.req = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); // 创建XMLHttpRequest对象</div><div class="line">&#125; catch (e) &#123;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">if (this.req) &#123;</div><div class="line">try &#123;</div><div class="line">var loader = this;</div><div class="line">// 指定回调函数</div><div class="line">this.req.onreadystatechange = function() &#123;</div><div class="line">net.AjaxRequest.onReadyState.call(loader);</div><div class="line">&#125;</div><div class="line">this.req.open(method, url, true); // 创建与服务器的连接</div><div class="line">if (method == &quot;POST&quot;) &#123; // 当发送POST请求时，设置请求头</div><div class="line">this.req.setRequestHeader(&quot;Content-Type&quot;,</div><div class="line">&quot;application/x-www-form-urlencoded&quot;);</div><div class="line">&#125;</div><div class="line">this.req.send(params); // 向服务器发送请求</div><div class="line">&#125; catch (err) &#123;</div><div class="line">this.onerror.call(this); // 调用错误处理函数</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 重构回调函数</div><div class="line">net.AjaxRequest.onReadyState = function() &#123;</div><div class="line">var req = this.req;</div><div class="line">var ready = req.readyState; // 获取请求状态</div><div class="line">if (ready == 4) &#123;</div><div class="line">if (req.status == 200) &#123;</div><div class="line">this.onload.call(this); // 调用回调函数</div><div class="line">&#125; else &#123;</div><div class="line">this.onerror.call(this); // 调用错误处理函数</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">// 重构默认的错误处理函数</div><div class="line">net.AjaxRequest.prototype.defaultError = function() &#123;</div><div class="line">alert(&quot;错误数据\n\n回调状态:&quot; + this.req.readyState + &quot;\n状态: &quot; + this.req.status);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/20/ajax/">前端-原生Ajax理解</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
+        <p><span>发布时间:</span>2016-05-20, 13:57:46</p>
+        <p><span>最后更新:</span>2016-08-28, 14:25:36</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/20/ajax/" title="前端-原生Ajax理解">http://qianyu1996.com/2016/05/20/ajax/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2016/05/20/ajax/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/05/24/reflect/">
+                    反射机制复习笔记
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">什么是Ajax?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">过程及代码</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"前端-原生Ajax理解　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/20/ajax/" data-title="前端-原生Ajax理解" data-url="http://qianyu1996.com/2016/05/20/ajax/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"yeqianyu"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){ 
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2016/05/20/ajax/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadComment();
+            $commentBar.fadeOut(800);
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/05/24/reflect/" title="上一篇: 反射机制复习笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/zcyl/">计算机组成原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/01/music/">Request</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/26/JVM/">JVM内存模型图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/leiji/">Java类集复习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/yuanze/">面向对象四大设计原则</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/reflect/">反射机制复习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/20/ajax/">前端-原生Ajax理解</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Evan Ye
+            </div>
+            <div class="footer-right">
+                <a href="http://club.aust.net.cn/portal.php">From AUST——知通团队</a><i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*)  " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
