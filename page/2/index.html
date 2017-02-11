@@ -278,76 +278,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-VPN" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/16/VPN/" class="article-date">
-      <time datetime="2016-08-16T07:50:01.000Z" itemprop="datePublished">2016-08-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.<br>搭建方式有OpenVPN，PPTP，SSH<br>OpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）<br>这里采用OpenVPN方式搭建。</p>
-<p>准备工作：下载Xshell客户端，连网状态（ChinaNet等公共场合的wifi无效）</p>
-<h3>一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</h3><br>SSH登陆VPS后输入<br><code>cat /dev/net/tun</code><br>若返回信息为：cat: /dev/net/tun: File descriptor in bad state 说明tun/tap已经可以使用；<br>如果返回：cat: /dev/net/tun: No such device 或其他则说明tun/tap没有被正确配置，发TK联系客服申请开通tun/tap。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/08/16/VPN/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-JVM" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -622,9 +552,78 @@
 
 
   
+    <article id="post-ajax" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/20/ajax/" class="article-date">
+      <time datetime="2016-05-20T05:57:46.000Z" itemprop="datePublished">2016-05-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/20/ajax/">前端-原生Ajax理解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。</p>
+<p><h2 color="red">什么是Ajax?</h2><br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/实践/">实践</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/05/20/ajax/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
   
 </div>
