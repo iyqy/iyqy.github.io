@@ -14,10 +14,13 @@
 <meta name="author" content="Evan Ye" />
 
 
+    
+    
+
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Evan's Island">
-<meta property="og:url" content="http://qianyu1996.com/archives/2016/index.html">
+<meta property="og:url" content="http://qianyu1996.com/page/3/index.html">
 <meta property="og:site_name" content="Evan's Island">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Evan's Island">
@@ -48,11 +51,13 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2016 | Evan&#39;s Island</title>
+<title>Evan&#39;s Island</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -61,9 +66,9 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
+        isHome: true,
         isPost: false,
-        isArchive: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -273,206 +278,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ajax" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/05/20/ajax/" class="article-date">
+      <time datetime="2016-05-20T05:57:46.000Z" itemprop="datePublished">2016-05-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/20/ajax/">前端-原生Ajax理解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>前言： 这两天在做一个人日记网站，基于前端+Servlet+JSP+JavaBean+tomcat+mysql实现，由于之前的实践很少碰到前端内容，这次自己搞也是边学边弄，到了js这块，必不可少的就是Ajax技术，博主花了一些时间去学习了一下，并做点总结。</p>
+<p><h2 color="red">什么是Ajax?</h2><br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/11/22/idea/" class="archive-article-date">
-      <time datetime="2016-11-22T04:34:59.000Z" itemprop="datePublished">11-22</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/22/idea/">三部曲方法论</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/产品/">产品</a>
+    <a class="article-category-link" href="/categories/实践/">实践</a>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/方法论/">方法论</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/11/20/page/" class="archive-article-date">
-      <time datetime="2016-11-20T11:31:59.000Z" itemprop="datePublished">11-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/20/page/">京东天猫app模块拆解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/产品/">产品</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/10/20/drzw/" class="archive-article-date">
-      <time datetime="2016-10-20T11:31:59.000Z" itemprop="datePublished">10-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/20/drzw/">多肉植物app设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/产品/">产品</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构/">结构</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/11/zcyl/" class="archive-article-date">
-      <time datetime="2016-09-11T10:28:53.000Z" itemprop="datePublished">09-11</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/11/zcyl/">计算机组成原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
+      
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/08/16/VPN/" class="archive-article-date">
-      <time datetime="2016-08-16T07:50:01.000Z" itemprop="datePublished">08-16</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+      
+        <p class="article-more-link">
+          <a href="/2016/05/20/ajax/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
     </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2016/page/2/">2</a><a class="extend next" rel="next" href="/archives/2016/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
-
 </div>
       <footer id="footer">
     <div class="outer">
