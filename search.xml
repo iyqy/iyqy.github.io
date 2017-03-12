@@ -73,7 +73,7 @@
 </ul>
 <h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ul>
 <li>并发执行的机制称为多线程<br>1.继承java.lang.Thread类</li>
-<li>==该子类应重写 Thread 类的 run 方法。==</li>
+<li>==该子类应重写 Thread 类的 run 方法==</li>
 <li><p>继承了Thread类的类重写public void run()方法,利用Thread中的start()运行该线程<br>2.实现接口java.lang.Runnable</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public Thread(Runnable r)</div><div class="line">public Thread(Runnable r,String name)</div></pre></td></tr></table></figure>
 </li>
@@ -110,9 +110,8 @@
 <li>线程的休眠sleep();在run方法中使用Thrad.sleep(time/ms);需要捕获异常</li>
 <li>线程的加入:Thread实例.join();加入线程</li>
 </ul>
-<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>#####1. 使用泛型的原因</p>
-<ul>
-<li>把对象丢进集合当中,取出对象时会被当成Object类<br>#####2. 使用方法</li>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h5 id="1-使用泛型的原因"><a href="#1-使用泛型的原因" class="headerlink" title="1. 使用泛型的原因"></a>1. 使用泛型的原因</h5><ul>
+<li>把对象丢进集合当中,取出对象时会被当成Object类<h5 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2. 使用方法"></a>2. 使用方法</h5></li>
 <li><p>在集合接口,类后增加尖括号,尖括号后放一个数据类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;String&gt;();</div></pre></td></tr></table></figure>
 </li>
@@ -120,9 +119,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;&gt;();</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>#####3. 泛型声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#####4. 子类派生</p>
-<ul>
+<h5 id="3-泛型声明"><a href="#3-泛型声明" class="headerlink" title="3. 泛型声明"></a>3. 泛型声明</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="4-子类派生"><a href="#4-子类派生" class="headerlink" title="4. 子类派生"></a>4. 子类派生</h5><ul>
 <li>子类不能使用类型形参<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class A extends Apple&lt;String&gt; </div><div class="line">public class A extends Apple&lt;T&gt; // 错误</div></pre></td></tr></table></figure>
 </li>
 </ul>
