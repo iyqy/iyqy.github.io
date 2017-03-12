@@ -21,9 +21,9 @@
 <li>System.in与System.out分别为InputStream与PrintStream的静态对象</li>
 </ul>
 <ol>
-<li>实例输入/输出对象时,将输入/输出流作为参数构造另外一个流的对象</li>
+<li>实例输入/输出对象时,将输入/输出流作为参数构造另外一个流的对象<a id="more"></a>
+4.输入 </li>
 </ol>
-<p>4.输入 </p>
 <ul>
 <li><ul>
 <li>InputStream</li>
