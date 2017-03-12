@@ -204,7 +204,7 @@
 <li>//匿名内部类 常用来实例接口<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">interface Product&#123;</div><div class="line">    public double getPrice();</div><div class="line">&#125;</div><div class="line">···</div><div class="line">new Product()&#123;</div><div class="line">    public double getPrice()&#123;</div><div class="line">        return 1.1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>1.事件模型:三个对象:事件源.事件,监听程序</p>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p>1.事件模型:三个对象:事件源.事件,监听程序</p>
 <ul>
 <li>事件源:例如:按钮</li>
 <li>产生事件对象如:ActionEvent的对象</li>
@@ -212,7 +212,7 @@
 <li>事件源加载监听器对象</li>
 <li>所有事件源的共有方法addXXXListener(),removeXXXListener();</li>
 </ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h5 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h5><p>若try发生异常,则抛出异常给java运行时环境,交给catch<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">try&#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">catch(Exception e)&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><h5 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h5><p>若try发生异常,则抛出异常给java运行时环境,交给catch<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">try&#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">catch(Exception e)&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h5 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h5><p>Exception与Error都是Throwable的子类</p>
 <h5 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h5><p>java1.7可以用一个catch语句捕获多个异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">catch(IndexOutOfBoundsException|</div><div class="line">NumberFormatException|ArithmeticException ie )</div></pre></td></tr></table></figure></p>
 <h5 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h5><p>异常对象的信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getMessage();//返回该该异常详细描述字符串</div><div class="line">printStackTrace();//将该异常的跟踪栈信息输出到指定的标准错误输出中</div><div class="line">getStackTrace();//返回···跟踪栈信息</div></pre></td></tr></table></figure></p>
