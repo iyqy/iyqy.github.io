@@ -110,9 +110,9 @@
 <li>线程的休眠sleep();在run方法中使用Thrad.sleep(time/ms);需要捕获异常</li>
 <li>线程的加入:Thread实例.join();加入线程</li>
 </ul>
-<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>1.##### 使用泛型的原因</p>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>#####1. 使用泛型的原因</p>
 <ul>
-<li>把对象丢进集合当中,取出对象时会被当成Object类<br>2.##### 使用方法</li>
+<li>把对象丢进集合当中,取出对象时会被当成Object类<br>#####2. 使用方法</li>
 <li><p>在集合接口,类后增加尖括号,尖括号后放一个数据类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;String&gt;();</div></pre></td></tr></table></figure>
 </li>
@@ -120,8 +120,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;&gt;();</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>3.##### 泛型声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>4.##### 子类派生</p>
+<p>#####3. 泛型声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####4. 子类派生</p>
 <ul>
 <li>子类不能使用类型形参<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class A extends Apple&lt;String&gt; </div><div class="line">public class A extends Apple&lt;T&gt; // 错误</div></pre></td></tr></table></figure>
 </li>
@@ -184,9 +184,9 @@
 <li>EnumClass.variable.ordinal()返回枚举值的索引<br>3.枚举类对象的创建<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EnumClass e=Enum.valueOf(EnumClass.class,&quot;EnumClass.variable&quot;);</div><div class="line">//利用静态方法创建枚举类实例</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>4.枚举类的实例类似于==匿名内部类==</p>
+<p>4.枚举类的实例类似于匿名内部类</p>
 <ul>
-<li><p>==枚举类当中的实例实际上就是匿名内部类，需要实现枚举类当中的抽象方法,枚举变量名实际上就是给匿名内部类”起名”==</p>
+<li><p>枚举类当中的实例实际上就是匿名内部类，需要实现枚举类当中的抽象方法,枚举变量名实际上就是给匿名内部类”起名”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public enum Operation&#123;</div><div class="line">    Plus&#123;</div><div class="line">        public double eval(double x,double y)&#123;</div><div class="line">            return x+y;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    public abstract double eval(double x,double y);</div><div class="line">    public static void main(String[] args)</div><div class="line">    &#123;</div><div class="line">        System.out.println(Operation.Plus.eval(3,4));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>//内部类    实例化内部类对象，外部类通过内部类对象调用方法</p>
