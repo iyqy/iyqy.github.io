@@ -35,7 +35,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 所有输入流都是抽象类InputStream(字节输入流)或者抽象类Reader(字符输入流)的子类
 所有输出流都是抽象类OutputStream（字节输出流）或抽象类Writer（字符输入流）的子类
 System.in与System.out分别为InputStream与PrintStream的静态对象3.实例输入/输">
-<meta property="og:updated_time" content="2017-03-12T12:37:40.228Z">
+<meta property="og:updated_time" content="2017-03-12T12:40:56.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2016级java组张祥笔记">
 <meta name="twitter:description" content="输入/输出1.流概述
@@ -368,14 +368,9 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li>readLine();获取流中的一行，返回值为字符串</li>
 </ol>
 <ul>
-<li>FileReader:文件数据输入流<br>1.构造方法(文件)</li>
+<li>FileReader:文件数据输入流<br>1.构造方法(文件)<br>5.输出</li>
 </ul>
 </li>
-</ul>
-<ol>
-<li>输出</li>
-</ol>
-<ul>
 <li><ul>
 <li>OutputStream</li>
 <li>构造方法(OutputStream)</li>
@@ -407,27 +402,17 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 </li>
 </ul>
 <h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ul>
-<li>并发执行的机制称为多线程</li>
-</ul>
-<ol>
-<li>继承java.lang.Thread类</li>
-</ol>
-<ul>
+<li>并发执行的机制称为多线程<br>1.继承java.lang.Thread类</li>
 <li>==该子类应重写 Thread 类的 run 方法。==</li>
-<li>继承了Thread类的类重写public void run()方法,利用Thread中的start()运行该线程</li>
-</ul>
-<ol>
-<li>实现接口java.lang.Runnable<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public Thread(Runnable r)</div><div class="line">public Thread(Runnable r,String name)</div></pre></td></tr></table></figure>
+<li><p>继承了Thread类的类重写public void run()方法,利用Thread中的start()运行该线程<br>2.实现接口java.lang.Runnable</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public Thread(Runnable r)</div><div class="line">public Thread(Runnable r,String name)</div></pre></td></tr></table></figure>
 </li>
-</ol>
-<ul>
-<li>①建立Runnable对象</li>
+<li><p>①建立Runnable对象</p>
+</li>
 <li>②使用参数为Runnable对象的构造方法创造Thread实例</li>
 <li>③调用start()方法启动线程</li>
 </ul>
-<ol>
-<li>线程的生命周期</li>
-</ol>
+<p>3.线程的生命周期</p>
 <ul>
 <li>出生：Thread t=new Thread();</li>
 <li>就绪: t.start();或者时间片结束；</li>
@@ -447,29 +432,17 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li>等待:t.wait(); t.notifyAll()或者T.notify()唤醒进程<ul>
 <li>休眠：sleep()，进入休眠状态</li>
 <li>阻塞：运行时发出输入/输出请求时</li>
-<li>死亡：run()执行完毕</li>
+<li>死亡：run()执行完毕<br>4.线程的操作</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-<ol>
-<li>线程的操作</li>
-</ol>
-<ul>
 <li>线程的休眠sleep();在run方法中使用Thrad.sleep(time/ms);需要捕获异常</li>
 <li>线程的加入:Thread实例.join();加入线程</li>
 </ul>
-<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><ol>
-<li><h5 id="使用泛型的原因"><a href="#使用泛型的原因" class="headerlink" title="使用泛型的原因"></a>使用泛型的原因</h5></li>
-</ol>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>1.##### 使用泛型的原因</p>
 <ul>
-<li>把对象丢进集合当中,取出对象时会被当成Object类</li>
-</ul>
-<ol>
-<li><h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5></li>
-</ol>
-<ul>
+<li>把对象丢进集合当中,取出对象时会被当成Object类<br>2.##### 使用方法</li>
 <li><p>在集合接口,类后增加尖括号,尖括号后放一个数据类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;String&gt;();</div></pre></td></tr></table></figure>
 </li>
@@ -477,43 +450,23 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList =new ArrayList&lt;&gt;();</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li><h5 id="泛型声明"><a href="#泛型声明" class="headerlink" title="泛型声明"></a>泛型声明</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><h5 id="子类派生"><a href="#子类派生" class="headerlink" title="子类派生"></a>子类派生</h5></li>
-</ol>
+<p>3.##### 泛型声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Apple&lt;T&gt;&#123;</div><div class="line">    private T info;</div><div class="line">    public Apple(T info)&#123; //构造器不要增加泛型声明</div><div class="line">        this.info=info;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Apple&lt;String&gt; a1=new Apple&lt;&gt;(&quot;苹果&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4.##### 子类派生</p>
 <ul>
 <li>子类不能使用类型形参<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class A extends Apple&lt;String&gt; </div><div class="line">public class A extends Apple&lt;T&gt; // 错误</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h4 id="比较规则"><a href="#比较规则" class="headerlink" title="比较规则"></a>比较规则</h4><ul>
 <li>Comparable实现了该接口(重写方法compareTo(Object o))的类具备比较性,能将此类的实例放入有序集合当中并对集合中的对象进行排序比较的即为调用该方法的元素与Object</li>
-<li>==为没有自然顺序的对象collection提供排序==实现了Comparator接口(重写方法compare)的类是一个比较器,将泛型(规定的类型)传入比较器当中.使用时,将比较器作为集合的构造函数当中的形参传入到构造器当中,即定义了集合当中元素的比较方法==此比较器还可以作为参数传递到Arrays.sort()方法中,作为对象的比较规则==</li>
-</ul>
-<ol>
-<li>集合类:Collection,Map</li>
-<li>Collection:</li>
-</ol>
-<ul>
+<li>==为没有自然顺序的对象collection提供排序==实现了Comparator接口(重写方法compare)的类是一个比较器,将泛型(规定的类型)传入比较器当中.使用时,将比较器作为集合的构造函数当中的形参传入到构造器当中,即定义了集合当中元素的比较方法==此比较器还可以作为参数传递到Arrays.sort()方法中,作为对象的比较规则==<br>1.集合类:Collection,Map<br>2.Collection:</li>
 <li>Queue:类似于List</li>
 <li>Set:无法记住添加这个元素的顺序，只能通过元素本身来访问</li>
 <li>List: 记住每次添加元素的顺序,直接通过索引访问</li>
 <li>Iterator iterator();遍历对象</li>
-<li>toArray(); 把集合转化为一个数组</li>
-</ul>
-<ol>
-<li>Map:key-value 根据key访问value</li>
-<li>Collection中的重要方法</li>
-</ol>
-<ul>
+<li>toArray(); 把集合转化为一个数组<br>3.Map:key-value 根据key访问value<br>4.Collection中的重要方法</li>
 <li>==所有实现了Iterable接口的类都可以使用迭代器,类用iterator()返回一个迭代器==</li>
 <li>add(),remove(),clear()，size()等</li>
-<li>Object[] toArray();把集合变成对应的数组，集合元素变成数组元素</li>
-</ul>
-<ol>
-<li>Set</li>
-</ol>
-<ul>
+<li>Object[] toArray();把集合变成对应的数组，集合元素变成数组元素<br>5.Set</li>
 <li>Set中不允许添加重复元素 </li>
 <li>TreeSet处于排序状态</li>
 <li>HashSet访问速度快</li>
@@ -521,11 +474,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li></li>
 </ul>
 <h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>1.基本语法格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">inteface xxx&#123;</div><div class="line">public static final 常量；</div><div class="line">public abstract 方法；</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>==一个类可以实现多个接口，但是只能有一个直接父类==</p>
-<ol>
-<li>接口的实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class xxx implements xxx&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<p>==一个类可以实现多个接口，但是只能有一个直接父类==<br>2.接口的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class xxx implements xxx&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>==方法名，返回值类型，参数个数及类型必须与接口中的完全一致，必须实现接口中的所有方法==</p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ul>
 <li>==重写== 子类方法名与父类方法名相同</li>
@@ -548,10 +497,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li>访问范围 public&gt;protected&gt;default&gt;private</li>
 <li>即使在该类的对象在此类外访问自身的private属性或者方法也是不允许的</li>
 </ul>
-<h3 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h3><p>类的对象有限而且固定</p>
-<ol>
-<li>枚举类的特性</li>
-</ol>
+<h3 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h3><p>类的对象有限而且固定<br>1.枚举类的特性</p>
 <ul>
 <li>enum关键字的地位与class,interface的地位相同</li>
 <li>默认继承java.lang.Enum</li>
@@ -560,19 +506,14 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li>所有实例必须在枚举类第一行显式列出，否则永远不会产生实例，实例的修饰符为==public static final==<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public enum Season Eunm&#123;</div><div class="line">    SPRING,SUMMER,FALL,WINTER;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li>枚举类的默认方法</li>
-</ol>
+<p>2.枚举类的默认方法</p>
 <ul>
 <li>values()返回该枚举类的所有实例</li>
 <li>使用实例时用EnumClass.variable</li>
 <li>Enum类实现Comparable接口,有方法compareTo()(关于compareTo方法的复写详见API文档)</li>
-<li>EnumClass.variable.ordinal()返回枚举值的索引</li>
-</ul>
-<ol>
-<li>枚举类对象的创建<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EnumClass e=Enum.valueOf(EnumClass.class,&quot;EnumClass.variable&quot;);</div><div class="line">//利用静态方法创建枚举类实例</div></pre></td></tr></table></figure>
+<li>EnumClass.variable.ordinal()返回枚举值的索引<br>3.枚举类对象的创建<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EnumClass e=Enum.valueOf(EnumClass.class,&quot;EnumClass.variable&quot;);</div><div class="line">//利用静态方法创建枚举类实例</div></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>4.枚举类的实例类似于==匿名内部类==</p>
 <ul>
 <li><p>==枚举类当中的实例实际上就是匿名内部类，需要实现枚举类当中的抽象方法,枚举变量名实际上就是给匿名内部类”起名”==</p>
@@ -583,9 +524,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
 <li>//匿名内部类 常用来实例接口<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">interface Product&#123;</div><div class="line">    public double getPrice();</div><div class="line">&#125;</div><div class="line">···</div><div class="line">new Product()&#123;</div><div class="line">    public double getPrice()&#123;</div><div class="line">        return 1.1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><ol>
-<li>事件模型:三个对象:事件源.事件,监听程序</li>
-</ol>
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>1.事件模型:三个对象:事件源.事件,监听程序</p>
 <ul>
 <li>事件源:例如:按钮</li>
 <li>产生事件对象如:ActionEvent的对象</li>
@@ -623,7 +562,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
         <p><span>本文标题:</span><a href="/2017/03/12/zhangxiangbiji/">2016级java组张祥笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
         <p><span>发布时间:</span>2017-03-12, 20:26:18</p>
-        <p><span>最后更新:</span>2017-03-12, 20:37:40</p>
+        <p><span>最后更新:</span>2017-03-12, 20:40:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/03/12/zhangxiangbiji/" title="2016级java组张祥笔记">http://qianyu1996.com/2017/03/12/zhangxiangbiji/</a>
             <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2017/03/12/zhangxiangbiji/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -653,7 +592,7 @@ System.in与System.out分别为InputStream与PrintStream的静态对象3.实例�
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-输出"><span class="toc-number">1.</span> <span class="toc-text">输入/输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程"><span class="toc-number">2.</span> <span class="toc-text">多线程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#泛型"><span class="toc-number"></span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用泛型的原因"><span class="toc-number">0.0.1.</span> <span class="toc-text">使用泛型的原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#使用方法"><span class="toc-number">0.0.2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#泛型声明"><span class="toc-number">0.0.3.</span> <span class="toc-text">泛型声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子类派生"><span class="toc-number">0.0.4.</span> <span class="toc-text">子类派生</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-number">1.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#比较规则"><span class="toc-number">1.1.</span> <span class="toc-text">比较规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">3.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">4.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举类"><span class="toc-number">5.</span> <span class="toc-text">枚举类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理"><span class="toc-number"></span> <span class="toc-text">事件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常"><span class="toc-number">0.1.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1"><span class="toc-number">0.1.1.</span> <span class="toc-text">1.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2"><span class="toc-number">0.1.2.</span> <span class="toc-text">2.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3"><span class="toc-number">0.1.3.</span> <span class="toc-text">3.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4"><span class="toc-number">0.1.4.</span> <span class="toc-text">4.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5"><span class="toc-number">0.1.5.</span> <span class="toc-text">5.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6"><span class="toc-number">0.1.6.</span> <span class="toc-text">6.</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#checkedException"><span class="toc-number">0.1.6.1.</span> <span class="toc-text">checkedException</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#runtimeException"><span class="toc-number">0.1.6.2.</span> <span class="toc-text">runtimeException</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7"><span class="toc-number">0.1.7.</span> <span class="toc-text">7.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8"><span class="toc-number">0.1.8.</span> <span class="toc-text">8.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9"><span class="toc-number">0.1.9.</span> <span class="toc-text">9.</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#checked异常：1-try···catch2-throws"><span class="toc-number">0.1.9.1.</span> <span class="toc-text">checked异常：1.try···catch2.throws</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#runtime异常-可以处理也可以不处理"><span class="toc-number">0.1.9.2.</span> <span class="toc-text">runtime异常 可以处理也可以不处理</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10"><span class="toc-number">0.1.10.</span> <span class="toc-text">10.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11"><span class="toc-number">0.1.11.</span> <span class="toc-text">11.</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-输出"><span class="toc-number">1.</span> <span class="toc-text">输入/输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程"><span class="toc-number">2.</span> <span class="toc-text">多线程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#泛型"><span class="toc-number"></span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-number">1.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#比较规则"><span class="toc-number">1.1.</span> <span class="toc-text">比较规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">3.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">4.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举类"><span class="toc-number">5.</span> <span class="toc-text">枚举类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理"><span class="toc-number"></span> <span class="toc-text">事件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常"><span class="toc-number">0.1.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1"><span class="toc-number">0.1.1.</span> <span class="toc-text">1.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2"><span class="toc-number">0.1.2.</span> <span class="toc-text">2.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3"><span class="toc-number">0.1.3.</span> <span class="toc-text">3.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4"><span class="toc-number">0.1.4.</span> <span class="toc-text">4.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5"><span class="toc-number">0.1.5.</span> <span class="toc-text">5.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6"><span class="toc-number">0.1.6.</span> <span class="toc-text">6.</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#checkedException"><span class="toc-number">0.1.6.1.</span> <span class="toc-text">checkedException</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#runtimeException"><span class="toc-number">0.1.6.2.</span> <span class="toc-text">runtimeException</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7"><span class="toc-number">0.1.7.</span> <span class="toc-text">7.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8"><span class="toc-number">0.1.8.</span> <span class="toc-text">8.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9"><span class="toc-number">0.1.9.</span> <span class="toc-text">9.</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#checked异常：1-try···catch2-throws"><span class="toc-number">0.1.9.1.</span> <span class="toc-text">checked异常：1.try···catch2.throws</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#runtime异常-可以处理也可以不处理"><span class="toc-number">0.1.9.2.</span> <span class="toc-text">runtime异常 可以处理也可以不处理</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10"><span class="toc-number">0.1.10.</span> <span class="toc-text">10.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11"><span class="toc-number">0.1.11.</span> <span class="toc-text">11.</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
