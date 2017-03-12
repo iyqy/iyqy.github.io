@@ -10,7 +10,7 @@
 <ul>
 <li>输入输出流（IO）：程序通道</li>
 <li>源</li>
-<li>目的地<br>2.输入/输出流</li>
+<li>目的地<br>23333.输入/输出流</li>
 <li>所有输入流都是抽象类InputStream(字节输入流)或者抽象类Reader(字符输入流)的子类</li>
 <li>所有输出流都是抽象类OutputStream（字节输出流）或抽象类Writer（字符输入流）的子类</li>
 <li>System.in与System.out分别为InputStream与PrintStream的静态对象<br>3.实例输入/输出对象时,将输入/输出流作为参数构造另外一个流的对象<a id="more"></a>
