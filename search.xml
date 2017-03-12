@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[2016级java组张祥笔记]]></title>
       <url>http://qianyu1996.com/2017/03/12/zxbj/</url>
-      <content type="html"><![CDATA[<h3 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h3><p>1.流概述</p>
+      <content type="html"><![CDATA[<h1 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h1><p>1.流概述</p>
 <ul>
 <li>输入输出流（IO）：程序通道</li>
 <li>源</li>
@@ -69,7 +69,7 @@
 </ol>
 </li>
 </ul>
-<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ul>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><ul>
 <li>并发执行的机制称为多线程<br>1.继承java.lang.Thread类</li>
 <li>该子类应重写 Thread 类的 run 方法</li>
 <li><p>继承了Thread类的类重写public void run()方法,利用Thread中的start()运行该线程<br>2.实现接口java.lang.Runnable</p>
