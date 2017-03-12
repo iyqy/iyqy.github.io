@@ -18,24 +18,18 @@
 </ul>
 <p>4.输入 </p>
 <ul>
-<li><ul>
 <li>InputStream</li>
 <li>构造方法(InputStream)</li>
-<li>read():从源中获取数据传入到流中</li>
+<li><p>read():从源中获取数据传入到流中</p>
+</li>
+<li><p>DataInputStream</p>
+</li>
 </ul>
-</li>
-<li><ul>
-<li>DataInputStream</li>
-</ul>
-</li>
-<li><p>-ZipInputStream </p>
-</li>
-<li><ul>
+<p>-ZipInputStream </p>
+<ul>
 <li>(字符处理)Reader</li>
 <li>BufferedReader:数据输入流<br>1.构造方法(Writer流对象)<br>2.readLine();获取流中的一行，返回值为字符串</li>
 <li>FileReader:文件数据输入流<br>1.构造方法(文件)</li>
-</ul>
-</li>
 </ul>
 <p>5.输出</p>
 <ul>
