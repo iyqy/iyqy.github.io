@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title><![CDATA[小程序界面设计规范]]></title>
+      <url>http://qianyu1996.com/2017/05/05/xcx/</url>
+      <content type="html"><![CDATA[<p>##小程序界面设计规范</p>
+<ul>
+<li>减少无关的设计元素对用户目标的干扰</li>
+<li>去掉任何与用户目标不相关的内容，明确页面主题</li>
+<li>区分操作主次，减轻用户的选择难度</li>
+<li>避免出现用户目标流程之外的内容而打断用户</li>
+<li><p>导航明确，来去自如，切勿增加用户学习成本或改变使用习惯<br>小程序导航栏分为导航区域、标题区域以及操作区域，颜色为深浅两种</p>
+<a id="more"></a>
+<p>Android：导航区仅存在唯一操作×，直接退出小程序。当用户通过操作区的<br>菜单将小程序添加至安卓桌面，并从安卓桌面打开小程序时，小程序的首页，不展示导航按钮。仅展示小程序标题和操作区。小程序次级页面，导航区只有返回上一级页面的操作</p>
+<p>IOS：微信进入小程序的第一个页面，导航区通常只有一个操作——“返回”，即返回进入小程序前的微信页面。 进入小程序后的次级页面，导航区的操作为——“返回” 和“关闭”。 “返回”，即返回上一级小程序界面或微信界面。“关闭”，即在当前界面直接退出小程序，回到进入小程序前的微信页面。</p>
+</li>
+<li>减少等待，反馈及时</li>
+<li>微信小程序内，使用微信提供标准的页面下拉刷新加载能力和样式</li>
+<li>页面内加载反馈</li>
+<li>谨慎使用模态加载（模态的加载样式将覆盖整个页面的）</li>
+<li>局部加载反馈（类似于ajax）</li>
+<li>页面局部操作结果反馈、页面全局操作结果——弹出式提示（Toast）、页面全局操作结果——模态对话框、页面全局操作结果—结果页</li>
+<li>异常可控，有路可退（表单报错，在表单顶部告知错误原因，并标识出错误字段提示用户修改）</li>
+<li>减少输入（摄像头识别银行卡号、地理位置接口）</li>
+<li>避免误操作（如增加大热区）</li>
+<li>利用接口提升性能（信设计中心已推出了一套网页标准控件库，包括 <a href="https://wximg.gtimg.com/shake_tv/mina/WEUI_1_0_161226_Sketch.zip" target="_blank" rel="external">sketch设计控件库</a> 和 <a href="https://wximg.gtimg.com/shake_tv/mina/WeUI1.0.psd.zip" target="_blank" rel="external">Photoshop设计控件库</a>，后续还将完善小程序组件）</li>
+<li>同意稳定性，统一的页面体验和有延续性的界面元素都将帮助用最少的学习成本达成使用目标</li>
+<li>视觉规范：<br><img src="http://upload-images.jianshu.io/upload_images/5741130-a729dea5f628a2c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-b913f23ac38fc4d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-b7d395f86f619042.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-fdc20b3cee6bc3b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-2b32da78e8d96f06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-1eaf4b2d38543237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-42da1ab560b0a310.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-56b815ed77476d81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-3a2532d0eac4203b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-8a46f2a898c9bb79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/5741130-55dec02e23d63077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+<li>组件库<br><a href="https://mp.weixin.qq.com/debug/wxadoc/design/#资源下载" target="_blank" rel="external">微信小程序组件仓库</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[神汽在线产品分析报告（word）]]></title>
       <url>http://qianyu1996.com/2017/02/08/sqzx/</url>
       <content type="html"><![CDATA[<p></p><h3>体验环境</h3><br>体验产品：神汽在线Android版本<br>软件版本：Android v2.7.1<br>设备型号：华为荣耀7<br>操作系统：EMUI 4.0.1<p></p>
