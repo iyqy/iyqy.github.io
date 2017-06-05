@@ -15,16 +15,34 @@
 
 
 
-<meta name="description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta name="description" content="PM根据产品所处的阶段阶段性的选择设计方案：
+NPS：净推荐值，客户忠诚度指标（推荐值减去批评值）
+
+初期阶段，跨越鸿沟，关注小白用户，主推优化核心功能（定义基础交互、定义视觉方案、优化关键路径）
+
+标签式交互：适用于5个以下的标签、每个使用频率都比较高，适合geek用户去探索发现新功能
+抽屉式交互：灵活性较高、让用户聚焦于当前交互内容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
-<meta property="og:url" content="http://qianyu1996.com/2016/08/16/VPN/index.html">
+<meta property="og:title" content="知乎随记">
+<meta property="og:url" content="http://qianyu1996.com/2017/04/05/zhsj/index.html">
 <meta property="og:site_name" content="Evan's Island">
-<meta property="og:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
-<meta property="og:updated_time" content="2016-08-28T14:11:51.825Z">
+<meta property="og:description" content="PM根据产品所处的阶段阶段性的选择设计方案：
+NPS：净推荐值，客户忠诚度指标（推荐值减去批评值）
+
+初期阶段，跨越鸿沟，关注小白用户，主推优化核心功能（定义基础交互、定义视觉方案、优化关键路径）
+
+标签式交互：适用于5个以下的标签、每个使用频率都比较高，适合geek用户去探索发现新功能
+抽屉式交互：灵活性较高、让用户聚焦于当前交互内容">
+<meta property="og:updated_time" content="2017-06-05T10:05:16.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
-<meta name="twitter:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta name="twitter:title" content="知乎随记">
+<meta name="twitter:description" content="PM根据产品所处的阶段阶段性的选择设计方案：
+NPS：净推荐值，客户忠诚度指标（推荐值减去批评值）
+
+初期阶段，跨越鸿沟，关注小白用户，主推优化核心功能（定义基础交互、定义视觉方案、优化关键路径）
+
+标签式交互：适用于5个以下的标签、每个使用频率都比较高，适合geek用户去探索发现新功能
+抽屉式交互：灵活性较高、让用户聚焦于当前交互内容">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +74,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>CentOS-5用OpenVZ方式搭建VPN通道 | Evan&#39;s Island</title>
+<title>知乎随记 | Evan&#39;s Island</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -275,11 +293,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="好友链接~" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-zhsj" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/16/VPN/" class="article-date">
-      <time datetime="2016-08-16T07:50:01.000Z" itemprop="datePublished">2016-08-16</time>
+      <a href="/2017/04/05/zhsj/" class="article-date">
+      <time datetime="2017-04-05T08:03:43.000Z" itemprop="datePublished">2017-04-05</time>
 </a>
 
 
@@ -294,7 +312,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CentOS-5用OpenVZ方式搭建VPN通道
+      知乎随记
     </h1>
   
 
@@ -303,13 +321,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+    <a class="article-category-link" href="/categories/产品/">产品</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/方法论/">方法论</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -319,24 +337,52 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.<br>搭建方式有OpenVPN，PPTP，SSH<br>OpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）<br>这里采用OpenVPN方式搭建。</p>
-<p>准备工作：下载Xshell客户端，连网状态（ChinaNet等公共场合的wifi无效）</p>
-<h3>一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</h3><br>SSH登陆VPS后输入<br><code>cat /dev/net/tun</code><br>若返回信息为：cat: /dev/net/tun: File descriptor in bad state 说明tun/tap已经可以使用；<br>如果返回：cat: /dev/net/tun: No such device 或其他则说明tun/tap没有被正确配置，发TK联系客服申请开通tun/tap。<br><a id="more"></a><br>然后检查iptables_nat模块（如果还没有安装iptables，先安装）<br><br><code>yum install iptables </code>   #如已安装跳过<br><br>接着请输入：<br><code>iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -j SNAT –to-source 11.22.33.44</code><br>（11.22.33.44是你VPS的IP）<br><br>然后用<br><br><code>iptables -t nat -L</code><br>查看iptables转发状态，如果显示以下类似的结果则说明转发成功：<br>target             prot opt source                      destination<br>SNAT              all – 10.168.0.0/16                anywhere                    to:11.22.33.44<br><br><h3>二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</h3><br>默认情况下CentOS的yum源是没有OpenVPN的,安装EPEL这个东西成功后,yum源里面就有OpenVPN了。<br>5.x版系统安装EPEL：<br><br><code>rpm -Uvh <a href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a></code><br><br><code>yum -y install openvpn</code><br>对了，在所有步骤之前（就是刚登陆进来时），最好先更新升级下系统，这样可以自动分析当前系统的安装环境并根据具体命令网络升级安装所需组件，更便于之后组件的安装。<br><code>yum -y update</code><br><br><h3>三、安装好后，先使用easy-rsa生成服务端证书：</h3><br>默认OpenVPN的easy-rsa文档会在/usr/share/doc/openvpn/examples/easy-rsa/，如果不在的话请先检查是否安装成功然后用locate或find命令查找该文档。<br>然后将该文档下所需的配置文件复制到/etc/openvpn/下面：<br><br>如果不存在则执行：<br><code>wget <a href="http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz" target="_blank" rel="external">http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz</a></code><br><code>tar -zxvf easy-rsa-2.2.0_master.tar.gz</code><br><code>cp -R easy-rsa-2.2.0_master/easy-rsa/ /etc/openvpn/</code><br><br><br>1、生成CA证书：<br><code>cd /etc/openvpn/easy-rsa/2.0</code><br><code>source vars</code><br><code>./clean-all</code><br><code>./build-ca</code><br>期间会提示输入一些信息，直接回车默认即可。<br><br>2、生成服务器端证书和密钥：（server为服务端名字可以自定义）<br><code>./build-key-server server</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br><br>3、生成客户端证书和密钥：（client为客户端名字可以自定义，注意这里的客户端名字不能与上步的服务端名字相同）<br><code>./build-key client</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br>若要生成多个客户端的证书和密钥，将client改成另外的名字重复操作即可。所有生成的证书和密钥存都放在/etc/openvpn/easy-rsa/2.0/keys/下面。<br><br>4、生成Diffie Hellman参数：<br><code>./build-dh</code><br><h3>四、配置OpenVPN服务器端文件</h3>
-
-<p>1、编辑/etc/openvpn/server.conf 文件，如果没有可以创建一个，加入下面的内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">local 11.22.33.44    #11.22.33.44为VPS的IP</div><div class="line">port 8080    #端口，需要与客户端配置保持一致，并保证与其他软件无共用</div><div class="line">proto udp    #使用协议，需要与客户端配置保持一致</div><div class="line">dev tun      #也可以选择tap模式</div><div class="line">ca /etc/openvpn/easy-rsa/2.0/keys/ca.crt</div><div class="line">cert /etc/openvpn/easy-rsa/2.0/keys/server.crt</div><div class="line">key /etc/openvpn/easy-rsa/2.0/keys/server.key</div><div class="line">dh /etc/openvpn/easy-rsa/2.0/keys/dh1024.pem</div><div class="line">ifconfig-pool-persist ipp.txt</div><div class="line">server 10.168.1.0 255.255.255.0    #给客户的分配的局域网IP段，注意不要与客户端网段冲突！</div><div class="line">push &amp;quot;redirect-gateway&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.8.8&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.4.4&amp;quot;</div><div class="line">client-to-client</div><div class="line">;duplicate-cn</div><div class="line">keepalive 20 60</div><div class="line">comp-lzo</div><div class="line">max-clients 50</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">status openvpn-status.log</div><div class="line">log-append openvpn.log</div><div class="line">verb 3</div><div class="line">mute 20</div></pre></td></tr></table></figure>
-<p>3、修改/etc/sysctl.conf的内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">net.ipv4.ip_forward = 1</div><div class="line">net.ipv4.conf.all.send_redirects = 0</div><div class="line">net.ipv4.conf.default.send_redirects = 0</div><div class="line">net.ipv4.conf.all.accept_redirects = 0</div><div class="line">net.ipv4.conf.default.accept_redirects = 0</div></pre></td></tr></table></figure></p>
-<p>重新载入/etc/sysctl.conf使其生效，执行如下命令：</p>
-<p><code>sysctl -p</code><br>至此VPS上的服务器端配置就全部完成了。<br>若想使其配置生效，则需重启OpenVPN服务</p>
-<p><code>service openvpn restart –config /etc/openvpn/server.conf</code></p>
-<h3>五、安装配置OpenVPN客户端文件</h3>
-
-<p>1、下载安装客户端<br>Windwos用户推荐去openvpn.net选择合适的版本进行安装，安装中的选项全部按默认即可；Mac用户推荐使用tunnelblick。</p>
-<p>2、下载之前在VPS上生成的客户端证书及密钥<br>证书和密钥存都在/etc/openvpn/easy-rsa/2.0/keys/里，可以使用winscp链接到VPS上下载，将ca.crt、client.crt、client.key这三个文件下载到OpenVPN客户端程序的config文件夹里,默认为：C:\Program Files\OpenVPN\config<br><code>yum  install lrzsz</code><br>此时再使用sz命令下载</p>
-<p>3、创建客户端配置文件<br>在C:\Program Files\OpenVPN\config 下面创建一个sunny.ovpn的文件，添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">client        #这个client不是自定义名称 不能更改</div><div class="line">dev tun       #要与前面server.conf中的配置一致。</div><div class="line">proto udp              #要与前面server.conf中的配置一致。</div><div class="line">remote 11.22.33.44 8080    #将11.22.33.44替换为你VPS的IP，端口与前面的server.conf中配置一致。</div><div class="line">resolv-retry infinite</div><div class="line">nobind</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">ca ca.crt              #具体名称以刚下载的为准</div><div class="line">cert client.crt              #具体名称以刚下载的为准</div><div class="line">key client.key              #具体名称以刚下载的为准</div><div class="line">ns-cert-type server</div><div class="line">redirect-gateway</div><div class="line">keepalive 20 60</div><div class="line">#tls-auth ta.key 1</div><div class="line">comp-lzo</div><div class="line">verb 3</div><div class="line">mute 20</div><div class="line">route-method exe</div><div class="line">route-delay 2</div></pre></td></tr></table></figure>
-<p></p><h3>六、运行OpenVPN客户端</h3><br>运行OpenVPN GUI后，屏幕右下角的系统托盘区，会显示一个由两个红屏电脑组成的图标，右击它，选中菜单中添加的名为sunny的服务器，点击Connect，<br>过一会儿，OpenVPN图标变成绿色时VPN就表示链接成功了。就表示链接成功了~<p></p>
-<p>参考原文：<a href="http://shit.name/openvpn-on-centos/" target="_blank" rel="external">http://shit.name/openvpn-on-centos/<a></a></a></p>
+        <ul>
+<li>PM根据产品所处的阶段阶段性的选择设计方案：</li>
+<li>NPS：净推荐值，客户忠诚度指标（推荐值减去批评值）</li>
+</ul>
+<p>初期阶段，跨越鸿沟，关注小白用户，主推优化核心功能（定义基础交互、定义视觉方案、优化关键路径）</p>
+<ul>
+<li>标签式交互：适用于5个以下的标签、每个使用频率都比较高，适合geek用户去探索发现新功能</li>
+<li>抽屉式交互：灵活性较高、让用户聚焦于当前交互内容<a id="more"></a>
+</li>
+</ul>
+<ul>
+<li><p>模块拆解思维（模块拆分思维的重要性）</p>
+</li>
+<li><p>传统行业和互联网还有哪些机会？<br>都是机会，信息对称，提升效率的（让商品和服务更加便捷），优化流程<br>，满足新需求提高用户的生活效率，差异化个性化用户反馈即使迭代（非品牌化、定制化）</p>
+</li>
+</ul>
+<ul>
+<li>o2o虚拟数字世界和显示世界互动的新的商业模式。<br>本质上：个性化内容+碎片化营销=各式精准互动的社会化营销（渠道与流量的整合），生活服务互联网化最重要的是数据的整合，为碎片化的决策消费和碎片化的享受消费提供战略依据</li>
+</ul>
+<ul>
+<li>数据分析，如何提供打点需求：次日留存、30日留存、月留存、新用户次日留存、pv uv。miui有很多数据分析后台</li>
+</ul>
+<h5 id="to-B和to-C的产品经理的区别"><a href="#to-B和to-C的产品经理的区别" class="headerlink" title="to B和to C的产品经理的区别"></a>to B和to C的产品经理的区别</h5><p>c：发现用户需求，定义用户价值，推动项目组达成这一目标。<br>b：根据公司战略或工作需要，构建生态系统，推动流程化，提高效率</p>
+<p>c端 需要有一定的运营基础、数据分析基础、交互设计能力、用户体验感知<br>指标考核：dau pv uv 活跃用户、用户增长、营收相关指标</p>
+<p>b端 需求梳理能力和个人推动能力<br>指标考核：系统建设、效率提升、工作能力进行指标建设</p>
+<h5 id="关于用户访谈"><a href="#关于用户访谈" class="headerlink" title="关于用户访谈"></a>关于用户访谈</h5><p>1.市场上的：客户看到了什么，遭遇的问题？（产品所处的环境）<br>2.影响者：听到的什么？（他的朋友说什么，谁影响了他）<br>3.外在表现行为？（怎么做的）<br>4.最大的挫折：挖掘痛点<br>5.最关注的：真正的想法和感觉？（梦想，想要什么，产品什么是最重要的）<br>when 第一次买我们产品是什么时候？1<br>where 在哪儿买的？1<br>compare1 有考虑过其他产品吗？（用前感受）1<br>recognize 店员和你说什么？2<br>why 买了多少为什么？3<br>feel 用后感觉？45<br>time 用了多久？3<br>compare2 换过其他产品吗？（用后感受）4<br>situation 什么情况下换的？4</p>
+<ul>
+<li>通过用户访谈完善这张表：<br>精益创业实战：<br>产品层面：遇到的三个问题，解决方案，关键指标，独特卖点，成本分析<br>市场层面：门槛优势，渠道，客户群体分类，收入分析，收支平衡点</li>
+</ul>
+<ul>
+<li>关于流量、转化率：<br>流量：<br>1.花钱买基本渠道<br>2.设置爆款诱饵<br>3.大平台换流量（线上平台、线下展会）<br>4.内部邀请引流<br>5.发展代理<br>转化率：<br>1公众符号背书（明星代言）<br>2.差异化效果<br>3.积分制度<br>4.过度宣传</li>
+</ul>
+<h5 id="关于直播模式："><a href="#关于直播模式：" class="headerlink" title="关于直播模式："></a>关于直播模式：</h5><p>秀场：<br>男色女色来吸引打造有需求的用户，挖掘高消费能力的用户<br>优点：变现快，流量现金运转良好<br>缺点：面临政策高压线，过度压榨用户<br>网易BOBO、YY、9158、炫舞、六间房</p>
+<p>网红：<br>挖掘一批具有粉丝号召力良好素质的任务来带动平台流量<br>优点：流量增长快，转型难度低，受众相对单一潜力大<br>缺点：过度依赖高价值主播，容易向秀场转型<br>代表：映客、Me直播、花椒、一直播</p>
+<p>平台：<br>输出高质量内容，如游戏直播、发布会、独特的才艺等<br>缺点：内容建造难度大<br>优点：可以支撑起整个平台内容的多样性<br>代表：斗鱼、虎牙、熊猫、花椒</p>
+<p>场景（社群模式）：<br>依赖于场景入口，社群交流，基于目前社会环境下的一种新的社交语言或者形式<br>优点：快速找到共识的团体<br>缺点：模式不够成熟</p>
+<p>即时社会交际仅能满足娱乐需求，对于人的发展没有任何作用，而传统社会交际形成的关系网则相反，我难以评价两种方式的优劣。</p>
+<p>爱奇艺的发展：<br>百度投资爱奇艺，在百度搜索结果页展示爱奇艺网站入口，视频行业用户转移成本低</p>
+<p>产品体验：<br>低网速借助于百度CDN布局保证了他的用户体验<br>高网速提供高清画质<br>补老片资源，建立起内容壁垒</p>
+<p>爱奇艺主打电影电视剧，优酷则是UGC，爱奇艺收购pps客户端视频<br>正版长视频、强化自制剧、启动UGC业务。买下独播版权，不分销，暗示着自制也会提上日程</p>
+<p>bilibili<br>1.抓牢了一批核心用户，聚焦起来一批ACG文化产品消费者的这一批核心用户</p>
+<p>2.培养出来弹幕亚文化社群</p>
+<p>3.合理的盈利机制：<br>1.没有会员体系（低龄用户并没有多少消费能力），承包制（这一年龄段的自我表现欲）<br>2.通过手游联运等衍生产品盈利</p>
+<p>4.缺点没有建立动漫周边销售渠道，需要开发文化产品，观看交流消费没有形成闭环</p>
+<h5 id="关于选取竞品："><a href="#关于选取竞品：" class="headerlink" title="关于选取竞品："></a>关于选取竞品：</h5><p>1.竞品，顾名思义，对你构成竞争威胁的产品，这里有个竞争对象，就是我们的用户。<br>选取竞品的特征（其中一个维度）：指标：用户群重合度。 用户占有率。这类指标比较难量化（），<br>结合用户画像。 提供相同或者相似的功能或者服务。（作为参考）</p>
+<p>交互设计？<br>确定一个核心目标也就是任务，吧流程图和框架图画出来（所经过的每一步），<br>确保能否顺利走到目标。 结束后考虑优化<br>（是否需要一下其他帮助更好的达到目标？辅助功能、系统提示、便捷入口）</p>
 
       
     </div>
@@ -345,13 +391,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/05/zhsj/">知乎随记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
-        <p><span>发布时间:</span>2016-08-16, 15:50:01</p>
-        <p><span>最后更新:</span>2016-08-28, 22:11:51</p>
+        <p><span>发布时间:</span>2017-04-05, 16:03:43</p>
+        <p><span>最后更新:</span>2017-06-05, 18:05:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/16/VPN/" title="CentOS-5用OpenVZ方式搭建VPN通道">http://qianyu1996.com/2016/08/16/VPN/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2016/08/16/VPN/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/05/zhsj/" title="知乎随记">http://qianyu1996.com/2017/04/05/zhsj/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2017/04/05/zhsj/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,15 +410,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/09/11/zcyl/">
-                    计算机组成原理
+                <a href="/2017/05/05/xcx/">
+                    小程序界面设计规范
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/05/26/JVM/">
-                    JVM内存模型图解
+                <a href="/2017/03/01/hlwsw/">
+                    怎么理解互联网思维
                 </a>
             </div>
         
@@ -384,7 +430,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、安装好后，先使用easy-rsa生成服务端证书：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、配置OpenVPN服务器端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">五、安装配置OpenVPN客户端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">六、运行OpenVPN客户端</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#to-B和to-C的产品经理的区别"><span class="toc-number">1.</span> <span class="toc-text">to B和to C的产品经理的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关于用户访谈"><span class="toc-number">2.</span> <span class="toc-text">关于用户访谈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关于直播模式："><span class="toc-number">3.</span> <span class="toc-text">关于直播模式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关于选取竞品："><span class="toc-number">4.</span> <span class="toc-text">关于选取竞品：</span></a></li></ol>
         
     </div>
     <style>
@@ -419,7 +465,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"CentOS-5用OpenVZ方式搭建VPN通道　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"知乎随记　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -435,7 +481,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/16/VPN/" data-title="CentOS-5用OpenVZ方式搭建VPN通道" data-url="http://qianyu1996.com/2016/08/16/VPN/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/05/zhsj/" data-title="知乎随记" data-url="http://qianyu1996.com/2017/04/05/zhsj/"></div>
     <script>
         var duoshuoQuery = {short_name:"yeqianyu"};
         var loadComment = function(){
@@ -448,7 +494,7 @@
         
             // Add comment count
             $(function(){ 
-                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2016/08/16/VPN/&callback=?";
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2017/04/05/zhsj/&callback=?";
                 $.getJSON(jsonUrl, function(result){
                     $.each(result.response, function(i, field){
                         var value = field.comments;
@@ -495,7 +541,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/09/11/zcyl/" title="上一篇: 计算机组成原理">
+            <a href="/2017/05/05/xcx/" title="上一篇: 小程序界面设计规范">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -503,7 +549,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/26/JVM/" title="下一篇: JVM内存模型图解">
+            <a href="/2017/03/01/hlwsw/" title="下一篇: 怎么理解互联网思维">
                 <i class="fa fa-angle-right"></i>
             </a>
         
