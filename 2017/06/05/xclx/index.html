@@ -15,16 +15,28 @@
 
 
 
-<meta name="description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta name="description" content="目标：通过对产品思考、结合用户调研，验证产品的合理性同时分析存在问题，并为下一次迭代做好准备。
+产品基本情况：【定位】  一款满足常见订票需求、收取费用的自动查询预订火车票的软件，可以实时监控票数的多少，与铁道部数据实时同步
+【优势】依托于携程旅行带来的巨额流量，携程火车票更容易满足在携程购买旅游产品等特定场景下有购票需求的用户，与公司其他产品形成闭环，助力于携程提供一站式出行服务。同时，依托于携">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
-<meta property="og:url" content="http://qianyu1996.com/2016/08/16/VPN/index.html">
+<meta property="og:title" content="携程火车票模块需求深挖">
+<meta property="og:url" content="http://qianyu1996.com/2017/06/05/xclx/index.html">
 <meta property="og:site_name" content="Evan's Island">
-<meta property="og:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
-<meta property="og:updated_time" content="2016-08-28T14:11:51.825Z">
+<meta property="og:description" content="目标：通过对产品思考、结合用户调研，验证产品的合理性同时分析存在问题，并为下一次迭代做好准备。
+产品基本情况：【定位】  一款满足常见订票需求、收取费用的自动查询预订火车票的软件，可以实时监控票数的多少，与铁道部数据实时同步
+【优势】依托于携程旅行带来的巨额流量，携程火车票更容易满足在携程购买旅游产品等特定场景下有购票需求的用户，与公司其他产品形成闭环，助力于携程提供一站式出行服务。同时，依托于携">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5741130-3b678507654b3d90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5741130-e58345d62e43c873.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5741130-61ad330075afed24.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5741130-01e9c9d782f32615.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5741130-9afb092df170ca64.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-06T02:52:16.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS-5用OpenVZ方式搭建VPN通道">
-<meta name="twitter:description" content="最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.搭建方式有OpenVPN，PPTP，SSHOpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）这里采用Ope">
+<meta name="twitter:title" content="携程火车票模块需求深挖">
+<meta name="twitter:description" content="目标：通过对产品思考、结合用户调研，验证产品的合理性同时分析存在问题，并为下一次迭代做好准备。
+产品基本情况：【定位】  一款满足常见订票需求、收取费用的自动查询预订火车票的软件，可以实时监控票数的多少，与铁道部数据实时同步
+【优势】依托于携程旅行带来的巨额流量，携程火车票更容易满足在携程购买旅游产品等特定场景下有购票需求的用户，与公司其他产品形成闭环，助力于携程提供一站式出行服务。同时，依托于携">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5741130-3b678507654b3d90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>CentOS-5用OpenVZ方式搭建VPN通道 | Evan&#39;s Island</title>
+<title>携程火车票模块需求深挖 | Evan&#39;s Island</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -275,11 +287,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="好友链接~" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-xclx" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/16/VPN/" class="article-date">
-      <time datetime="2016-08-16T07:50:01.000Z" itemprop="datePublished">2016-08-16</time>
+      <a href="/2017/06/05/xclx/" class="article-date">
+      <time datetime="2017-06-05T02:49:04.000Z" itemprop="datePublished">2017-06-05</time>
 </a>
 
 
@@ -294,7 +306,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CentOS-5用OpenVZ方式搭建VPN通道
+      携程火车票模块需求深挖
     </h1>
   
 
@@ -303,13 +315,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+    <a class="article-category-link" href="/categories/产品/">产品</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/产品/">产品</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -319,24 +331,65 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近租了个VPS，Host1Plus，0.5 Core  256MB 内存 20GB 磁盘 500GB，2美元一个月，机房在芝加哥，预装centos5系统.想尝试一下在这个VPS搭建VPN.<br>搭建方式有OpenVPN，PPTP，SSH<br>OpenVPN比PPTP好伺候，能装在基于OpenVZ虚拟化技术的VPS（PPTP只能装在基于Xen的VPS，但大多数VPS因为成本原因是OpenVZ的）<br>这里采用OpenVPN方式搭建。</p>
-<p>准备工作：下载Xshell客户端，连网状态（ChinaNet等公共场合的wifi无效）</p>
-<h3>一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</h3><br>SSH登陆VPS后输入<br><code>cat /dev/net/tun</code><br>若返回信息为：cat: /dev/net/tun: File descriptor in bad state 说明tun/tap已经可以使用；<br>如果返回：cat: /dev/net/tun: No such device 或其他则说明tun/tap没有被正确配置，发TK联系客服申请开通tun/tap。<br><a id="more"></a><br>然后检查iptables_nat模块（如果还没有安装iptables，先安装）<br><br><code>yum install iptables </code>   #如已安装跳过<br><br>接着请输入：<br><code>iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -j SNAT –to-source 11.22.33.44</code><br>（11.22.33.44是你VPS的IP）<br><br>然后用<br><br><code>iptables -t nat -L</code><br>查看iptables转发状态，如果显示以下类似的结果则说明转发成功：<br>target             prot opt source                      destination<br>SNAT              all – 10.168.0.0/16                anywhere                    to:11.22.33.44<br><br><h3>二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</h3><br>默认情况下CentOS的yum源是没有OpenVPN的,安装EPEL这个东西成功后,yum源里面就有OpenVPN了。<br>5.x版系统安装EPEL：<br><br><code>rpm -Uvh <a href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="external">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a></code><br><br><code>yum -y install openvpn</code><br>对了，在所有步骤之前（就是刚登陆进来时），最好先更新升级下系统，这样可以自动分析当前系统的安装环境并根据具体命令网络升级安装所需组件，更便于之后组件的安装。<br><code>yum -y update</code><br><br><h3>三、安装好后，先使用easy-rsa生成服务端证书：</h3><br>默认OpenVPN的easy-rsa文档会在/usr/share/doc/openvpn/examples/easy-rsa/，如果不在的话请先检查是否安装成功然后用locate或find命令查找该文档。<br>然后将该文档下所需的配置文件复制到/etc/openvpn/下面：<br><br>如果不存在则执行：<br><code>wget <a href="http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz" target="_blank" rel="external">http://swupdate.openvpn.org/community/releases/easy-rsa-2.2.0_master.tar.gz</a></code><br><code>tar -zxvf easy-rsa-2.2.0_master.tar.gz</code><br><code>cp -R easy-rsa-2.2.0_master/easy-rsa/ /etc/openvpn/</code><br><br><br>1、生成CA证书：<br><code>cd /etc/openvpn/easy-rsa/2.0</code><br><code>source vars</code><br><code>./clean-all</code><br><code>./build-ca</code><br>期间会提示输入一些信息，直接回车默认即可。<br><br>2、生成服务器端证书和密钥：（server为服务端名字可以自定义）<br><code>./build-key-server server</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br><br>3、生成客户端证书和密钥：（client为客户端名字可以自定义，注意这里的客户端名字不能与上步的服务端名字相同）<br><code>./build-key client</code><br>期间也会提示输入一些信息，直接回车默认，选择[Y/n]的都选Y。<br>若要生成多个客户端的证书和密钥，将client改成另外的名字重复操作即可。所有生成的证书和密钥存都放在/etc/openvpn/easy-rsa/2.0/keys/下面。<br><br>4、生成Diffie Hellman参数：<br><code>./build-dh</code><br><h3>四、配置OpenVPN服务器端文件</h3>
-
-<p>1、编辑/etc/openvpn/server.conf 文件，如果没有可以创建一个，加入下面的内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">local 11.22.33.44    #11.22.33.44为VPS的IP</div><div class="line">port 8080    #端口，需要与客户端配置保持一致，并保证与其他软件无共用</div><div class="line">proto udp    #使用协议，需要与客户端配置保持一致</div><div class="line">dev tun      #也可以选择tap模式</div><div class="line">ca /etc/openvpn/easy-rsa/2.0/keys/ca.crt</div><div class="line">cert /etc/openvpn/easy-rsa/2.0/keys/server.crt</div><div class="line">key /etc/openvpn/easy-rsa/2.0/keys/server.key</div><div class="line">dh /etc/openvpn/easy-rsa/2.0/keys/dh1024.pem</div><div class="line">ifconfig-pool-persist ipp.txt</div><div class="line">server 10.168.1.0 255.255.255.0    #给客户的分配的局域网IP段，注意不要与客户端网段冲突！</div><div class="line">push &amp;quot;redirect-gateway&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.8.8&amp;quot;</div><div class="line">push &amp;quot;dhcp-option DNS 8.8.4.4&amp;quot;</div><div class="line">client-to-client</div><div class="line">;duplicate-cn</div><div class="line">keepalive 20 60</div><div class="line">comp-lzo</div><div class="line">max-clients 50</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">status openvpn-status.log</div><div class="line">log-append openvpn.log</div><div class="line">verb 3</div><div class="line">mute 20</div></pre></td></tr></table></figure>
-<p>3、修改/etc/sysctl.conf的内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">net.ipv4.ip_forward = 1</div><div class="line">net.ipv4.conf.all.send_redirects = 0</div><div class="line">net.ipv4.conf.default.send_redirects = 0</div><div class="line">net.ipv4.conf.all.accept_redirects = 0</div><div class="line">net.ipv4.conf.default.accept_redirects = 0</div></pre></td></tr></table></figure></p>
-<p>重新载入/etc/sysctl.conf使其生效，执行如下命令：</p>
-<p><code>sysctl -p</code><br>至此VPS上的服务器端配置就全部完成了。<br>若想使其配置生效，则需重启OpenVPN服务</p>
-<p><code>service openvpn restart –config /etc/openvpn/server.conf</code></p>
-<h3>五、安装配置OpenVPN客户端文件</h3>
-
-<p>1、下载安装客户端<br>Windwos用户推荐去openvpn.net选择合适的版本进行安装，安装中的选项全部按默认即可；Mac用户推荐使用tunnelblick。</p>
-<p>2、下载之前在VPS上生成的客户端证书及密钥<br>证书和密钥存都在/etc/openvpn/easy-rsa/2.0/keys/里，可以使用winscp链接到VPS上下载，将ca.crt、client.crt、client.key这三个文件下载到OpenVPN客户端程序的config文件夹里,默认为：C:\Program Files\OpenVPN\config<br><code>yum  install lrzsz</code><br>此时再使用sz命令下载</p>
-<p>3、创建客户端配置文件<br>在C:\Program Files\OpenVPN\config 下面创建一个sunny.ovpn的文件，添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">client        #这个client不是自定义名称 不能更改</div><div class="line">dev tun       #要与前面server.conf中的配置一致。</div><div class="line">proto udp              #要与前面server.conf中的配置一致。</div><div class="line">remote 11.22.33.44 8080    #将11.22.33.44替换为你VPS的IP，端口与前面的server.conf中配置一致。</div><div class="line">resolv-retry infinite</div><div class="line">nobind</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">ca ca.crt              #具体名称以刚下载的为准</div><div class="line">cert client.crt              #具体名称以刚下载的为准</div><div class="line">key client.key              #具体名称以刚下载的为准</div><div class="line">ns-cert-type server</div><div class="line">redirect-gateway</div><div class="line">keepalive 20 60</div><div class="line">#tls-auth ta.key 1</div><div class="line">comp-lzo</div><div class="line">verb 3</div><div class="line">mute 20</div><div class="line">route-method exe</div><div class="line">route-delay 2</div></pre></td></tr></table></figure>
-<p></p><h3>六、运行OpenVPN客户端</h3><br>运行OpenVPN GUI后，屏幕右下角的系统托盘区，会显示一个由两个红屏电脑组成的图标，右击它，选中菜单中添加的名为sunny的服务器，点击Connect，<br>过一会儿，OpenVPN图标变成绿色时VPN就表示链接成功了。就表示链接成功了~<p></p>
-<p>参考原文：<a href="http://shit.name/openvpn-on-centos/" target="_blank" rel="external">http://shit.name/openvpn-on-centos/<a></a></a></p>
+        <p>目标：通过对产品思考、结合用户调研，验证产品的合理性同时分析存在问题，并为下一次迭代做好准备。</p>
+<p>产品基本情况：<br>【定位】<br>  一款满足常见订票需求、收取费用的自动查询预订火车票的软件，可以实时监控票数的多少，与铁道部数据实时同步</p>
+<p>【优势】依托于携程旅行带来的巨额流量，携程火车票更容易满足在携程购买旅游产品等特定场景下有购票需求的用户，与公司其他产品形成闭环，助力于携程提供一站式出行服务。同时，依托于携程庞大的服务团队呼叫中心以及BD团队，携程火车票提供高质量服务的同时也能有很稳定的渠道保障，带来更安全、更方便、更省心的用户体验。<br><a id="more"></a><br>【劣势】产品较为受国家政策的影响、依赖于火车票互联网唯一分销商数据（12306），致使产品优化存在瓶颈。同时，以二级入口的形态存在的携程火车票在享有场景带来流量的同时，一定程度上损失了部分有单一垂直需求的购票用户（后者携程已并购智行、铁友火车票…完美）</p>
+<p>【基本商业模式】技术型产品，利用商务团队获得各铁路部门的数据接口，结合携程的算法，提供给体验更好的购票服务，同时售卖保险产品，从中获取服务利润。（从身边同学的体验来看，推测是保险产品为大头的利润，不过师兄有数据还是以数据统计出来的为准）</p>
+<p>【市场规模】<br>1.IT通过桔子得知携程于15年并购智行火车票1亿，可通过各大投资机构对相应市场的投资力度侧面反映出市场的火爆程度。<br>2.由易观智库的数据得知未来铁路出行人次将一直保持增长的势头。<br>中国在线火车票预订市场专题研究报告<br>（url）<br>3.通过替换变量，随着中国高铁的进步、国家经济的发展，旅游、商务等所拉动的出行市场必然是个朝阳行业<br>（能力有限，0岁PM初步认知市场通过这三个方式——资本数据层面、规模数据、替换变量侧面了解）</p>
+<p>【主要版本迭代记录】</p>
+<ul>
+<li>v4.2 (2013-02-01) 【火车票】国内机票、高铁动车票订单支持取消订单功能；</li>
+<li>v4.4 (2013-04-22)【火车票】全面支持普通车次预订，满足您更多出行需求;</li>
+<li>v4.5 (2013-06-09) 【火车票】支持在线退票服务；支持支付宝，付款更方便;</li>
+<li>v5.3 (2014-01-15)【火车票】火车可订儿童票啦，爸爸快带我去旅行！</li>
+<li>v5.4.2 (2014-04-10)【火车票】微信支付，多种支付方式任你选;</li>
+<li>v5.8 (2014-08-14)【火车票】支持国际火车票预订;</li>
+<li>v5.9 (2014-09-18)【火车票】支持国际火车票通票预订；</li>
+<li>v5.10 (2014-10-20)【火车票】欧铁通票预订，让你畅享欧陆风情； </li>
+<li>v6.0.1 (2014-12-09)【火车票】优化上车补票，优化查询日历;</li>
+<li>v6.2.0 (2015-02-06)【火车票】一键推荐汽车票；</li>
+<li>v6.3.0 (2015-03-20)【火车票】支持在线改签票，出行自由又快捷;</li>
+<li>v6.4.0 (2015-04-24)【自由行】支持打包火车票+酒店产品；</li>
+<li>v6.5.0 (2015-05-21)【火车票】支持送票上门、学生票预订；</li>
+<li>v6.6.0 (2015-06-25)【火车票】支持余票监控、捡漏票、私人定制票;</li>
+<li>v6.7.0 (2015-07-28)【火车票】火车票也能私人订制，指定座位不再是梦；</li>
+<li>v6.8.0 (2015-08-27)【火车票】独家开放高铁动车“真”选座，想坐哪就坐哪；</li>
+<li>v6.9.0 (2015-09-28)【火车票】国内火车票可改签，台铁预订全新上线；</li>
+<li>v6.10.2 (2015-11-05)【火车票】全面支持极速云抢票，全自动，更省心；</li>
+<li>v6.11.0 (2015-11-18)【火车票】支持多车次抢票，全自动，成功率更高；</li>
+<li>v6.12.1 (2015-12-21)【火车票】第八代超人抢票引擎，全力以赴帮您回家；</li>
+<li>v6.16.0 (2016-05-20)超值套餐、票价立减，更有抢票超智能推荐；</li>
+<li>v6.19.0 (2016-08-17)【火车票】抢票3.0，支持抢学生票、全新预约抢票;</li>
+<li>v6.20.0 (2016-09-23)【火车票】绑卡后，可以不付钱先抢票啦；</li>
+<li>v6.21.0 (2016-11-08)【火车票】中转站新上线，智能推荐中转方案；</li>
+<li>v7.0.2 (2017-01-09)【火车票】先抢票后付钱，全力以赴，帮您回家；</li>
+</ul>
+<p>从以上迭代过程可以看出，在V6.0之前所做的迭代都是针对用户的基本订票需求来做出努力，可以说是一款能解决基本问题的MVP。<strong>V6.0之后根据产品发展的模型“三向模型”来进行规划，如：</strong><br>垂直场景下的需求深挖：支持在线改签票、送票上门等。<br>横向上的需求拓展：一键推荐汽车票；购买汽车票等。<br>拓展场景前后的需求：推荐购买保险；接火车送火车服务；行李寄送等。</p>
+<p>【用户评价】<br>1.对核心功能云抢票十分满意，正向评价居多。</p>
+<p>2.对于客服服务的态度较为满意。</p>
+<p>用户群：<br>用户特征维度：<br>人口属性：青少年、大学生、中年、老年<br>心理特征：注重安全性、注重效率、注重可能性、贪小便宜、懒惰等<br>职业：学生、白领、体制内员工、外来务工者、自由职业者、商务人员、企业主等</p>
+<p>场景维度：<br>春运等节假日抢票、商务出行前、商务出行中、旅游出行前、旅游中途、固定时间探亲、火车晚点、帮同事买票等一切与买票有关的场景</p>
+<p>根据以上所罗列的一些特征与场景，<strong>我们可以根据场景频繁度高或者用户基数大的一些情况进行需求分析与需求深入挖掘、拓展（结合后台数据判断），如此挖掘需求点以给用户带来最大程度的满意以及产品的收益。</strong></p>
+<p>当然在分析之前我们不能忘了产品在这个阶段，通过咨询公司买来的、或通过大量调研验证、VC机构看好的最最<strong>核心的痛点</strong>，比如共享单车-解决最后一公里，滴滴-低价高效的打到车。<br>火车票产品的用户痛点在于：<strong>能否高效帮我解决长途出行问题</strong>（我个人认为任何需求都不能以牺牲核心需求来做优化，所有服务如云抢票、国际火车票、路线推荐等都是在高效、解决出行问题的基础上做优化）</p>
+<p>举个例子：<br>显而易见，学生是互联网订票的主力军之一（如果不是最主要的用户群，那也是占比非常高的一类用户，这类用户的特征和其他用户在特征上有许多重合点，定量可结合产品前辈拿到的后台数据），<strong>他的需求涵盖了一款火车票产品很大一部分要实现的需求。</strong></p>
+<p>【用户访谈】<br>目的：收集需求并分析，由此来粗略体验一下携程火车票迭代的合理性，同时挖掘一些有可能的价值点。</p>
+<p>角色：<br>学生   年龄：22    性格特征： 注重安全、爱旅游、拖延症</p>
+<p>通过对该同学的访谈得到了如下信息：<br>【订票方式】大多数通过无线端12306订票、偶尔去车站订票。很少考虑其他的订票软件，原因为注册填写信息麻烦。</p>
+<p>【使用场景】<br>放假回家，通过12306购票，通常买卧铺，在完成购票的过程中，利用下单又取消订单等方式来买到自己想要的下铺。对于改签的使用场景：放假时间改了、时间更早的车票出票了，可以更早回家。</p>
+<p>【异常场景】<br>1.买不到票的时候怎么解决<br>换成第二天的票，或者等一段时间再去看看有没有人退票可以买。‘<br>买终点上一站的票，到火车上临时补票。<br>2.到终点后的场景<br>通过滴滴打车、公交车或者地铁的方式前往目的地</p>
+<p>【槽点】<br>希望火车站开通支付宝支付，火车站买票不能用支付宝只能用银行卡，又通过12036不能购票（火车发车前某时间段12306将停止售票，而线下渠道仍然开通售卖服务）</p>
+<p>比对携程迭代的各版本，V6.0后的大部分契合了这位同学垂直场景下的需求：<br>1.很少考虑其他购票软件因为注册填写信息麻烦——登陆可关联12306购票<br>2.等一段时间再去看看有没有人退票可以买——余票监控<br>3.通常买卧铺下铺——推出购买制定位置车票的功能<br>4.通过滴滴打车、公交车或者地铁的方式前往目的地——推出接送火车业务<br>5.买终点上一站的票，到火车上临时补票——智能推荐购票方案<br>6.希望火车站开通支付宝支付——未解决<br>7.时间更早的车票出票要改签——携程推出的改签功能</p>
+<p>【需求分析】<br>因为此次用研的目的是验证携程火车票产品功能所对应的的需求可行性，所以没有过多去寻找不同特征的用户群来验证需求的强弱性以及实现难度来进行优先级排布。而后具体工作相信需要结合具体的pv、下单率等指标以及AB测试法来验证。这里针对第六点需求写一些自己的思考。</p>
+<p>第六点要求火车站开通支付宝支付，当然携程作为一家下游订票平台，无法实现这样的需求，但是这里的需求并非为真正的需求。之前很强调一点就是不管如何都不能忘记最核心的痛点，能否高效帮我解决长途出行问题是火车票产品的核心，所以显然，要求火车站开通支付宝的目的无疑是想直接用支付宝高效的买到即将发车的车票，那携程能做些什么呢？让用户通过我们的产品买到即将发车的票。但是矛盾点在于12306作为分销商，火车发车前某时间段12306即停止售票，携程上也提供不了这种票的销售服务。PM看似要协调问题了，把问题反馈给12306？屯票是否有可能？或许要进行一场头脑风暴也许有解决的方案？ 也许意义不大，考虑到这个用研的样本小，而且就算能提供这种类的型票也不见得用户买账，低频弱需求实现成本明显高，PM不能做…</p>
+<p>【竞品分析】<br>为模拟在真实情况下产品的使用，我采用<strong>实地观察</strong>观察的方式，让我的同学模拟下预定了去上海的火车票，我在边上看，他来叙述他的关注点<br>发现我同学作为用户来说，操作步骤都在集中在如下逻辑图之内：<br><img src="http://upload-images.jianshu.io/upload_images/5741130-3b678507654b3d90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="绘图1.png"><br>为了进一部分析火车票产品，我们拆解该模块：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5741130-e58345d62e43c873.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="火车票.png"><br>产品结构简单明了，底部导航栏四个Tab依次是“抢票”、“在线选座”、“订单”、“火车服务” 。产品核心的车票查询、购票、抢票功能展示在模块打开后的一级页面，清晰直观。</p>
+<p>但为了保证核心功能展示层级高，多数功能隐藏至火车服务。用户找到“车站攻略”、“行李寄送”功能需要经过火车服务——行李寄送打开。根据携程后台的数据，可以考虑将部分服务展示层级提高，不仅仅是在二级页面展示。</p>
+<p>######对比了同程旅游等其他产品最终给出的两点产品优化建议：<br>1：<br><img src="http://upload-images.jianshu.io/upload_images/5741130-61ad330075afed24.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="筛选功能.jpg"></p>
+<p>在二级入口筛选车票功能模块，提供了出发、到站条件筛选，并且可以提供多选功能。体验过程中第一次看到这个筛选不是很理解是什么意思，对比同程旅行提供的筛选功能，同程将出发与到站两个筛选条件分别列举出来独占一定的区域让用户选择，清晰明了，让用户可快速选择到站、出站区，而携程火车票犯了低级错误，在条件选择上让用户感到纠结。无论是<strong>布局还是选择</strong>都产生了歧义——出发站点与到达车站选项想当然认为是左右布局，实际上是上下布局（上部分为出发车站，下部分为到达车站），选择方面我同时勾选了杭州东站与杭州站产生了歧义（系统会不会列出杭州东站送到杭州站的车票呢？）结合用户的实际使用场景，或者后台数据（<strong>在筛选界面停留的时间最为关键指标推出AB测试，如果确实能减少停留时间，引导用户更早的筛选出车票下单，那么我们这个优化就是有意义的。</strong>）</p>
+<p>2：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5741130-01e9c9d782f32615.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="抢票功能.jpg"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5741130-9afb092df170ca64.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="终止时间.jpg"></p>
+<p>在实际使用抢票功能时我们有一种常见的场景，也是本人真实遇到过的问题——我准备今天去上海，但是车票已经售完了，所以我试试看抢票功能，让它一直帮我监控着，有的话就帮我下单吧，<strong>结果在快要发车的时候携程帮我抢到的票，可是我家离车站很远啊赶不过去，退票的话又要扣除手续费！</strong> 这里就有一个抢票时间设定的问题——<strong>用户可自由设置抢票终止时间，如果在这个时间段没有抢到票就停了吧，我买明天的票</strong>，而携程提供默认的抢票终止时间是随机的，若是这样则会是用户遭遇如上尴尬的使用场景，建议在抢票信息填写信息提示一栏可抢票时间段可设置（考虑到余票监控需要占用服务器大量资源，携程设置的终止抢票时间必然是通过当前服务器资源等利用算法做判断生成的，<strong>所以我们可以让用户仅有将终止抢票时间提前的权利，这样子既避免了用户尴尬场景优化用户体验，还一定程度上减少了服务器资源成本提高收益</strong>）</p>
 
       
     </div>
@@ -345,13 +398,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/16/VPN/">CentOS-5用OpenVZ方式搭建VPN通道</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/05/xclx/">携程火车票模块需求深挖</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
-        <p><span>发布时间:</span>2016-08-16, 15:50:01</p>
-        <p><span>最后更新:</span>2016-08-28, 22:11:51</p>
+        <p><span>发布时间:</span>2017-06-05, 10:49:04</p>
+        <p><span>最后更新:</span>2017-06-06, 10:52:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/16/VPN/" title="CentOS-5用OpenVZ方式搭建VPN通道">http://qianyu1996.com/2016/08/16/VPN/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2016/08/16/VPN/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/05/xclx/" title="携程火车票模块需求深挖">http://qianyu1996.com/2017/06/05/xclx/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2017/06/05/xclx/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -363,16 +416,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/09/11/zcyl/">
-                    计算机组成原理
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/05/26/JVM/">
-                    JVM内存模型图解
+                <a href="/2017/05/12/mj/">
+                    美甲行业用户访谈报告
                 </a>
             </div>
         
@@ -384,7 +431,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、OpenVPN需要tun和iptables_nat模块支持，所以先检查你的VPS支持不支持。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、tun和iptables_nat模块检测通过后，正式进入安装阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、安装好后，先使用easy-rsa生成服务端证书：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、配置OpenVPN服务器端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">五、安装配置OpenVPN客户端文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">六、运行OpenVPN客户端</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -419,7 +466,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"CentOS-5用OpenVZ方式搭建VPN通道　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"携程火车票模块需求深挖　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -435,7 +482,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/16/VPN/" data-title="CentOS-5用OpenVZ方式搭建VPN通道" data-url="http://qianyu1996.com/2016/08/16/VPN/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/06/05/xclx/" data-title="携程火车票模块需求深挖" data-url="http://qianyu1996.com/2017/06/05/xclx/"></div>
     <script>
         var duoshuoQuery = {short_name:"yeqianyu"};
         var loadComment = function(){
@@ -448,7 +495,7 @@
         
             // Add comment count
             $(function(){ 
-                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2016/08/16/VPN/&callback=?";
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2017/06/05/xclx/&callback=?";
                 $.getJSON(jsonUrl, function(result){
                     $.each(result.response, function(i, field){
                         var value = field.comments;
@@ -495,15 +542,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/09/11/zcyl/" title="上一篇: 计算机组成原理">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/26/JVM/" title="下一篇: JVM内存模型图解">
+            <a href="/2017/05/12/mj/" title="下一篇: 美甲行业用户访谈报告">
                 <i class="fa fa-angle-right"></i>
             </a>
         
