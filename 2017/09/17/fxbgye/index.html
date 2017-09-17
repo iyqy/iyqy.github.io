@@ -15,18 +15,19 @@
 
 
 
-<meta name="description" content="————上图为集合类间接口的实现关系————">
+<meta name="description" content="title: ������ҵ��������: 2017-07-07 16:12:41tags:��Ʒ����
+�������ӣ�http://www.jianshu.com/p/f4f0c2dafffb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java类集复习笔记">
-<meta property="og:url" content="http://qianyu1996.com/2016/05/25/leiji/index.html">
+<meta property="og:title" content="Evan's Island">
+<meta property="og:url" content="http://qianyu1996.com/2017/09/17/fxbgye/index.html">
 <meta property="og:site_name" content="Evan's Island">
-<meta property="og:description" content="————上图为集合类间接口的实现关系————">
-<meta property="og:image" content="http://occtjfc90.bkt.clouddn.com/leiji.png">
-<meta property="og:updated_time" content="2016-08-28T05:48:51.738Z">
+<meta property="og:description" content="title: ������ҵ��������: 2017-07-07 16:12:41tags:��Ʒ����
+�������ӣ�http://www.jianshu.com/p/f4f0c2dafffb">
+<meta property="og:updated_time" content="2017-09-17T08:15:21.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java类集复习笔记">
-<meta name="twitter:description" content="————上图为集合类间接口的实现关系————">
-<meta name="twitter:image" content="http://occtjfc90.bkt.clouddn.com/leiji.png">
+<meta name="twitter:title" content="Evan's Island">
+<meta name="twitter:description" content="title: ������ҵ��������: 2017-07-07 16:12:41tags:��Ʒ����
+�������ӣ�http://www.jianshu.com/p/f4f0c2dafffb">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java类集复习笔记 | Evan&#39;s Island</title>
+<title>Evan&#39;s Island</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -277,11 +278,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="好友链接~" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-leiji" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-fxbgye" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/25/leiji/" class="article-date">
-      <time datetime="2016-05-25T05:30:20.000Z" itemprop="datePublished">2016-05-25</time>
+      <a href="/2017/09/17/fxbgye/" class="article-date">
+      <time datetime="2017-09-17T08:12:41.287Z" itemprop="datePublished">2017-09-17</time>
 </a>
 
 
@@ -292,60 +293,12 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java类集复习笔记
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p></p><p style="text-align: center;"><img src="http://occtjfc90.bkt.clouddn.com/leiji.png" width="70%" height="62%" alt="内存模型"></p><p></p>
-<p></p><p align="center">————上图为集合类间接口的实现关系————</p><br><a id="more"></a><p></p>
-<p>1.了解java设置类集合的主要目的。<br>2.掌握Collection接口的作用和主要方法<br>3.掌握Collection子接口List Set的区别和常用子类的使用<br>4.掌握Map接口的作用，及其常用子类<br>5.SortedSet SortedMap<br>6.Iterator，Enumeration，foreach<br>7.掌握properties的使用<br>8.了解工具类Collection的使用</p>
-<p>基本概念：所谓类集就是一个动态的对象数组，不受对象数组长度的限制，类集必须是<br>容易拓展和修改的。</p>
-<p>Collection：public interface Collection<e> extends Iterable<e><br>toArray()将集合变成对象数组</e></e></p>
-<p>List:public interface List<e> extends Collection<e><br>可以存放重复的内容<br>常用方法：add(在指定位置插入元素时，所有其他元素后移一位),addAll(),get(),indexOf(查找自定元素的位置),ListIterator(),set(替换元素)<br>remove():自定义的类如果要删除就要复写equals，hashCode方法；</e></e></p>
-<p>ArrayList和Vector类比较：<br>ArrayList：新操作类，异步处理，性能好，用Iterator，foreach输出<br>Vector：旧操作类，同步处理，性能差，用Iterator，foreach，Enumeration输出<br>Vector方法是addElement</p>
-<p>LinkedList：数据结构链表实现FIFO,实现了Queue和List接口<br>addFirst():在链表的开头增加元素<br>addLast():在链表的结尾增加元素</p>
-<p>Set：不能存放重复的内容，所有的重复内容靠hashCode()和equals()方法区分；<br>HashSet：散列存放<br>对象删除重复需要对象复写equals方法和hashCode方法<br>代码;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public class Person1 &#123;</div><div class="line"> private String name;</div><div class="line"> private int age;</div><div class="line"></div><div class="line"> public String getName() &#123;</div><div class="line">  return name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public void setName(String name) &#123;</div><div class="line">  this.name = name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public int getAge() &#123;</div><div class="line">  return age;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public void setAge(int age) &#123;</div><div class="line">  this.age = age;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public String toString() &#123;</div><div class="line">  return &quot;年齡=&quot; + this.age + &quot;名字=&quot; + this.name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public boolean equals(Object obj) &#123;</div><div class="line">  if (this == obj) &#123;</div><div class="line">   return true;</div><div class="line">  &#125;</div><div class="line">  if (!(obj instanceof Person1))</div><div class="line"></div><div class="line">  &#123;</div><div class="line">   return false;</div><div class="line">  &#125;</div><div class="line">  Person1 p = (Person1) obj;</div><div class="line">  if (this.name.equals(p.name) &amp;&amp; this.age == this.age) &#123;</div><div class="line">   return true;</div><div class="line">  &#125; else &#123;</div><div class="line">   return false;</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public int hashCode() &#123;</div><div class="line">  return this.name.hashCode() * this.age;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>TreeSet:有序排列<br>对象删除重复需要每个对象都实现Comparable接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class Person implements Comparable&lt;Person&gt; &#123;</div><div class="line"> private String name;</div><div class="line"> private int age;</div><div class="line"></div><div class="line"> public String getName() &#123;</div><div class="line">  return name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public void setName(String name) &#123;</div><div class="line">  this.name = name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public int getAge() &#123;</div><div class="line">  return age;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public void setAge(int age) &#123;</div><div class="line">  this.age = age;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public String toString() &#123;</div><div class="line">  return &quot;年齡=&quot; + this.age + &quot;名字=&quot; + this.name;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> public int compareTo(Person o) &#123;</div><div class="line">  if (this.age &gt; o.getAge()) &#123;</div><div class="line">   return 1;</div><div class="line">  &#125; else if (this.age &lt; o.getAge()) &#123;</div><div class="line">   return -1;</div><div class="line">  &#125; else &#123;</div><div class="line"></div><div class="line">   return this.name.compareTo(o.name);</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Queue：队列接口<br>peek（）：找到头结点<br>poll（）找到头节点并删除<br>element（）找到链表的表头</p>
-<p>SortedSet：对集合中的数据进行排序</p>
-<p>Iterator:迭代输出，是使用最多的输出方式<br>ListIterator:是Iterator的子接口，专门用于list集合输出，双向输出<br>Enumeration:旧接口，功能与Iterator类似<br>foreach:可以输出数组或者集合，jdk1.5之后的功能</p>
-<p>Iterator：<br>Iterator it = list.iterator();<br>方法：hasNext();是否有下一个值<br>       next();输出当前元素<br>       remove();删除当前元素</p>
-<p> 注意点：<br> 一个集合把内容交给迭代器删除时候，因为集合也有remove方法，删除的时候调用<br> 了自身的删除方法，迭代器就会出现运行时错误（因为集合本身被破坏掉，所以迭代器<br> 就会中止迭代出现错误）<br> remove之前必须要执行it.next指向该元素，否则会出现异常</p>
-<p> ListIterator<br> 如果想完成双向输出，则首先要完成由前向后的输出。  </p>
-<p> Enumeration：<br> 无删除操作，类似于Iterator<br> 想要实现此接口只能通过Vector类elements方法</p>
-<p>Map</p>
-<p>HashMap：无序存放，key不允许重复，key可以为null<br>Hashtable：无需存放，旧的操作类，key不允许重复，key不可null<br>TreeMap:可以排序的Map集合，按照key排序，不允许重复<br>WeakTreeMap：弱引用Map集合，不在使用某些内容时gc回收<br>IdentityHashMap：key可以重复的Map集合</p>
-<p>Map：<br>keySet（）方法，可以将所有的key变成一个Set集合<br>values（）方法返回Collection对象，得到所有value值</p>
-<p>TreeMap 按照key排序<br>对象实现comparable接口</p>
-<p>Map迭代：<br>1.将Map接口的实例通过entrySet（）方法变成Set接口对象<br>2.通过set接口实例为Iterator实例化<br>3.迭代输出每个对象都是Map.Entry对象<br>4.通过Map.Entry进行key–value的分离</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Iterator;</div><div class="line">import java.util.Map;</div><div class="line">import java.util.Map.Entry;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line"> public static void main(String[] args) &#123;</div><div class="line">  Map&lt;String,String&gt; m=new HashMap&lt;String,String&gt;();</div><div class="line">        m.put(&quot;hah0&quot;, &quot;heh0&quot;);</div><div class="line">        m.put(&quot;hah1&quot;, &quot;heh1&quot;);</div><div class="line">        m.put(&quot;hah2&quot;, &quot;heh2&quot;);</div><div class="line">        m.put(&quot;hah3&quot;, &quot;heh3&quot;);</div><div class="line">        m.put(&quot;hah4&quot;, &quot;heh4&quot;);</div><div class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; s = m.entrySet();</div><div class="line">       Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it =s.iterator();</div><div class="line">      while(it.hasNext())&#123;</div><div class="line">      Map.Entry&lt;String, String&gt; me =it.next();</div><div class="line">       System.out.println(me.getKey()+me.getValue());</div><div class="line">       </div><div class="line">   </div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果要使用自己的匿名類作為key，則必須要复写其类中的equals和hashCode方法</p>
-<p>SortedMap：<br>同SortedSet类似的原理</p>
+        <hr>
+<p>title: ������ҵ��������: 2017-07-07 16:12:41<br>tags:<br>��Ʒ����</p>
+<p>�������ӣ�<a href="http://www.jianshu.com/p/f4f0c2dafffb" target="_blank" rel="external">http://www.jianshu.com/p/f4f0c2dafffb</a></p>
 
       
     </div>
@@ -354,13 +307,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/25/leiji/">Java类集复习笔记</a></p>
+        <p><span>本文标题:</span><a href="/2017/09/17/fxbgye/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Evan Ye</a></p>
-        <p><span>发布时间:</span>2016-05-25, 13:30:20</p>
-        <p><span>最后更新:</span>2016-08-28, 13:48:51</p>
+        <p><span>发布时间:</span>2017-09-17, 16:12:41</p>
+        <p><span>最后更新:</span>2017-09-17, 16:15:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/25/leiji/" title="Java类集复习笔记">http://qianyu1996.com/2016/05/25/leiji/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2016/05/25/leiji/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/17/fxbgye/" title="">http://qianyu1996.com/2017/09/17/fxbgye/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qianyu1996.com/2017/09/17/fxbgye/　　作者: Evan Ye" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -372,16 +325,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/26/JVM/">
-                    JVM内存模型图解
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/05/24/yuanze/">
-                    面向对象四大设计原则
+                <a href="/2017/06/05/xclx/">
+                    携程火车票模块需求深挖
                 </a>
             </div>
         
@@ -428,7 +375,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java类集复习笔记　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| Evan's Island　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -444,7 +391,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/25/leiji/" data-title="Java类集复习笔记" data-url="http://qianyu1996.com/2016/05/25/leiji/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/09/17/fxbgye/" data-title="" data-url="http://qianyu1996.com/2017/09/17/fxbgye/"></div>
     <script>
         var duoshuoQuery = {short_name:"yeqianyu"};
         var loadComment = function(){
@@ -457,7 +404,7 @@
         
             // Add comment count
             $(function(){ 
-                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2016/05/25/leiji/&callback=?";
+                var jsonUrl = "http://api.duoshuo.com/threads/counts.jsonp?short_name=yeqianyu&threads=2017/09/17/fxbgye/&callback=?";
                 $.getJSON(jsonUrl, function(result){
                     $.each(result.response, function(i, field){
                         var value = field.comments;
@@ -504,15 +451,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/26/JVM/" title="上一篇: JVM内存模型图解">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/24/yuanze/" title="下一篇: 面向对象四大设计原则">
+            <a href="/2017/06/05/xclx/" title="下一篇: 携程火车票模块需求深挖">
                 <i class="fa fa-angle-right"></i>
             </a>
         
